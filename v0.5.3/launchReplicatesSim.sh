@@ -54,7 +54,7 @@ prd_oprt_1=0    # argv[33] is predator oportunistic? (0 or 1)
 prd_spcf_1=0    # argv[34] is predator specific? (0 or 1)
 
 # time variables
-simu_time=20    # argv[35] simulation time
+simu_time=10    # argv[35] simulation time
 freq_repr=5    # argv[36] frequency of reproduction trials
 freq_surv=5    # argv[37] frequency of survival trials
 freq_rfll=5    # argv[38] frequency of landscape resources refill
