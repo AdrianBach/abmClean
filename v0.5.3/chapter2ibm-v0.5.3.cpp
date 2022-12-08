@@ -1680,7 +1680,7 @@ public:
             int dailyCons = 0;                              // initiate a tracker for pred consumption (in resources)
             int predCons = populationTablePtr[rowIndex][3]; // get predator resource pool
 
-            while (i < availablePreys.size())
+            while (i < availablePreys.size() && dailyCons < dailyPredMaxConsumption && predCons < predMaxConsumption)
             {
                 /* get preys info */
                 int preyType = availablePreys[i];
@@ -1698,55 +1698,51 @@ public:
                          << endl;
                 }
 
-                while (dens > 0 && dailyCons < dailyPredMaxConsumption && predCons < predMaxConsumption)
+                /* sample a random number between 0 and 1 in an uniform distribution */
+                float randomNb = randomNumberGenerator0to1(0, 1);
+
+                if (debug == true)
+                    cout << "random sample is: " << randomNb << " ; proba is: " << catchProb << endl
+                            << endl;
+
+                /* compare to the catch probability, if < catch, if > fail */
+                if (randomNb < catchProb)
                 {
-                    /* sample a random number between 0 and 1 in an uniform distribution */
-                    float randomNb = randomNumberGenerator0to1(0, 1);
+                    LandscapeTable[indCellCode][catchColumn] += 1;  // increment corresponding catch cell in landscape table
+                    LandscapeTable[indCellCode][densColumn] -= 1;   // decrement density on the cell such that another predator cannot catch more individuals than there actually are on the cell
+                    populationTablePtr[rowIndex][3] += convRate;    // increment predator resource pool
+                                                                    //
+                    predCons = populationTablePtr[rowIndex][3];     // update predCons variable
+                    dailyCons += convRate;                          // update daily consuption variable
+                    dens = LandscapeTable[indCellCode][densColumn]; // update prey's density on this cell
 
+                    /* debug */
                     if (debug == true)
-                        cout << "random sample is: " << randomNb << " ; proba is: " << catchProb << endl
-                             << endl;
-
-                    /* compare to the catch probability, if < catch, if > fail */
-                    if (randomNb < catchProb)
                     {
-                        LandscapeTable[indCellCode][catchColumn] += 1;  // increment corresponding catch cell in landscape table
-                        LandscapeTable[indCellCode][densColumn] -= 1;   // decrement density on the cell such that another predator cannot catch more individuals than there actually are on the cell
-                        populationTablePtr[rowIndex][3] += convRate;    // increment predator resource pool
-                                                                        //
-                        predCons = populationTablePtr[rowIndex][3];     // update predCons variable
-                        dailyCons += convRate;                          // update daily consuption variable
-                        dens = LandscapeTable[indCellCode][densColumn]; // update prey's density on this cell
+                        cout << "a " << memberTypes[membersMatchingListsIndex] << " caught a prey (situated column " << densColumn << " in landscape table) on cell " << indCellCode << endl
+                                << "its resource pool now got " << predCons << " in it" << endl;
 
-                        /* debug */
-                        if (debug == true)
-                        {
-                            cout << "a " << memberTypes[membersMatchingListsIndex] << " caught a prey (situated column " << densColumn << " in landscape table) on cell " << indCellCode << endl
-                                 << "its resource pool now got " << predCons << " in it" << endl;
-
-                            if (dens == 0)
-                                cout << "No more prey situated column " << densColumn << " in landscape table on cell " << indCellCode << "." << endl
-                                     << endl;
-                            else if (dailyCons >= dailyPredMaxConsumption)
-                                cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this time step." << endl
-                                     << endl;
-                            else if (predCons >= predMaxConsumption)
-                                cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl
-                                     << endl;
-                        }
+                        if (dens == 0)
+                            cout << "No more prey situated column " << densColumn << " in landscape table on cell " << indCellCode << "." << endl
+                                    << endl;
+                        else if (dailyCons >= dailyPredMaxConsumption)
+                            cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this time step." << endl
+                                    << endl;
+                        else if (predCons >= predMaxConsumption)
+                            cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl
+                                    << endl;
                     }
-                    else
-                    {
-                        if (debug == true)
-                            cout << "predator catch attempt failed" << endl
-                                 << endl;
-                    }
-
-                } // end of while loop over conditions for hunting
+                }
+                else
+                {
+                    if (debug == true)
+                        cout << "predator catch attempt failed" << endl
+                                << endl;
+                } // end of if loop 
 
                 i++; // increment prey index
 
-            } // end of while loop over preys
+            } // end of while loop over preys and over conditions for hunting
 
             ind++; // next individual
 
