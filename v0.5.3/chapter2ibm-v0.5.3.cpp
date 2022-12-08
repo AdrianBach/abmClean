@@ -2078,7 +2078,7 @@ int main(int argc, char **argv)
 
             /* predators */
             if (timeStep >= predIntro[0])
-                pred1->hunt(world.landscapeTablePtr, false);
+                pred1->huntNew(world.landscapeTablePtr, true);
 
             // for (int i = 0; i < predatorTypesNb; i++)
             // {
