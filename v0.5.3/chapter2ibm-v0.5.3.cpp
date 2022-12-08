@@ -1552,12 +1552,13 @@ public:
     void huntNew(int **LandscapeTable, bool debug)
     {
 
-        /* debug */
+        /* debug
         if (debug == true)
         {
             cout << memberTypes[membersMatchingListsIndex] << " are hunting" << endl
                  << endl;
         }
+        */
 
         /* shuffle the order of the individuals */
         vector<int> shuffledPop = shuffleOrder(currentPopulationSize);
@@ -1590,7 +1591,7 @@ public:
             /* vector of available preys on cell */
             vector<int> availablePreys;
 
-            /* fill the vector with prey types random
+            /* fill the vector with prey types 
                vector is as long as the sum of each preys' density on this cell */
             for (int i = 0; i < preysDensity.size(); i++)
             {
@@ -1673,6 +1674,17 @@ public:
 
             }
 
+            if (debug == true)
+            {
+                cout << "Available preys vector:" << endl;
+                for (int i = 0; i < availablePreys.size(); i++)
+                {
+                    cout << availablePreys[i] << " ";
+                }
+                cout << endl
+                     << endl;
+            }
+
             /* iterate through prey columns and while catches < maxCatches and
                that there are prey available, catch them */
 
@@ -1692,7 +1704,7 @@ public:
 
                 if (debug == true)
                 {
-                    cout << "searching for prey " << preyType << endl
+                    cout << "searching for prey " << preyType+1 << endl
                          << "its catch counting column in landscape table is number " << catchColumn << endl
                          << "its density on this cell is " << dens << endl
                          << endl;
@@ -1715,23 +1727,13 @@ public:
                     predCons = populationTablePtr[rowIndex][3];     // update predCons variable
                     dailyCons += convRate;                          // update daily consuption variable
                     dens = LandscapeTable[indCellCode][densColumn]; // update prey's density on this cell
-
-                    /* debug */
+                
                     if (debug == true)
                     {
-                        cout << "a " << memberTypes[membersMatchingListsIndex] << " caught a prey (situated column " << densColumn << " in landscape table) on cell " << indCellCode << endl
-                                << "its resource pool now got " << predCons << " in it" << endl;
-
-                        if (dens == 0)
-                            cout << "No more prey situated column " << densColumn << " in landscape table on cell " << indCellCode << "." << endl
-                                    << endl;
-                        else if (dailyCons >= dailyPredMaxConsumption)
-                            cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this time step." << endl
-                                    << endl;
-                        else if (predCons >= predMaxConsumption)
-                            cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl
-                                    << endl;
+                            cout << "a " << memberTypes[membersMatchingListsIndex] << " caught a prey (situated column " << densColumn << " in landscape table) on cell " << indCellCode << endl
+                                 << "its resource pool now got " << predCons << " in it" << endl;
                     }
+                
                 }
                 else
                 {
@@ -1740,6 +1742,20 @@ public:
                                 << endl;
                 } // end of if loop 
 
+                /* debug */
+                if (debug == true)
+                {
+                    if (i >= availablePreys.size())
+                        cout << "No more prey situated column " << densColumn << " in landscape table on cell " << indCellCode << "." << endl
+                                << endl;
+                    if (dailyCons >= dailyPredMaxConsumption)
+                        cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this time step." << endl
+                                << endl;
+                    if (predCons >= predMaxConsumption)
+                        cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl
+                                << endl;
+                }
+                
                 i++; // increment prey index
 
             } // end of while loop over preys and over conditions for hunting
