@@ -87,7 +87,7 @@ ratio=1
 prd_cvrt_pry2_1=$(($ratio*$prd_cvrt_pry1_1))  # argv[32] predator 1 prey1 resources/catch
 
 # name the simulation with only the variables of interest and their value
-sim_name="test-size$size-simTime$simu_time-res1max$max_res_1-predOprt$prd_oprt_1-predSpcf$prd_spcf_1-pry1cons$pry_cons_1-prdSurv$prd_surv_1-prdCtchProb1$prd_ctch_pry1_1-prdCtchProb2$prd_ctch_pry2_1" # argv[1]
+sim_name="test-huntNew" # argv[1]
 
 ## Warning about timing of introduction ##
 #if [[ ( $P = "SFTP" && $PORT != "22" ) || ( $P = "FTPS" && $PORT != "990" && $PORT != "21" ) ]] ; then
