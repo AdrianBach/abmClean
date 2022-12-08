@@ -1594,17 +1594,20 @@ public:
                vector is as long as the sum of each preys' density on this cell */
             for (int i = 0; i < preysDensity.size(); i++)
             {
-                /* repeat preyType number as often as their density on the cell*/
-                for (int j = 0; j < preysDensity[i]; i++)
+                if (preysDensity[i] > 0)
                 {
-                    availablePreys.push_back(i);
+                    /* repeat preyType number as often as their density on the cell*/
+                    for (int j = 0; j < preysDensity[i]; i++)
+                    {
+                        availablePreys.push_back(i);
+                    }
                 }
             }
             
             if (predSpecific[0] == false)
             {
                 if (debug == true)
-                    cout << "predator is generalist: randomizing available preys." << endl;
+                    cout << "predator is generalist: shuffling available preys." << endl;
                 
                 if (predOportunistic[0] == true)
                 {
@@ -1649,13 +1652,15 @@ public:
                     /* update availablepreys */
                     for (int i = 0; i < sortedIndexes.size(); i++)
                     {
-                        /* repeat preyType number as often as their density on the cell*/
-                        for (int j = 0; j < preysDensity[sortedIndexes[i]]; i++)
+                        if (preysDensity[i] > 0)
                         {
-                            availablePreys.push_back(sortedIndexes[i]);
+                            /* repeat preyType number as often as their density on the cell*/
+                            for (int j = 0; j < preysDensity[sortedIndexes[i]]; i++)
+                            {
+                                availablePreys.push_back(sortedIndexes[i]);
+                            }
                         }
                     }
-
                 } // end if opportunistic 
                 else 
                 {
@@ -1676,7 +1681,7 @@ public:
             /* iterate through prey columns and while catches < maxCatches and
                that there are prey available, catch them */
 
-            int i = 0;                                      // initiate index for conversion rate
+            int i = 0;                                      // initiate index for preys vector
             int dailyCons = 0;                              // initiate a tracker for pred consumption (in resources)
             int predCons = populationTablePtr[rowIndex][3]; // get predator resource pool
 

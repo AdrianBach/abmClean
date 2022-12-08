@@ -43,7 +43,7 @@ pry_intro_2=0   # argv[20]
 
 # predator variables
 prd_nb=1        # argv[21] number of predator types
-prd_init_1=25    # argv[22] predator 1 initial density in nb of individuals
+prd_init_1=5    # argv[22] predator 1 initial density in nb of individuals
 prd_move_1=0.1  # argv[23] predator 1 max movement range in fraction of size
 prd_offs_1=1    # argv[26] predator 1 max number of offspring
 prd_intr_1=0    # argv[28] predator 1 time of introduction in the model
