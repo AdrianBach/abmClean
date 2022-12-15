@@ -945,7 +945,7 @@ public:
                         survivalProba = 0; // just for security
                     else
                     {
-                        survivalProba = 1 - exp(- ln(0.1) / (float) maintenanceCost * (float) populationTablePtr[ind][3]);    // careful float * int, should work like that
+                        survivalProba = 1 - exp(- log(0.1) / (float) maintenanceCost * (float) populationTablePtr[ind][3]);    // careful float * int, should work like that
 
                         randomNb = randomNumberGenerator0to1(0, 1); // generate a random number between 0 and 1
 
@@ -959,8 +959,7 @@ public:
                             zz += 1;
 
                             if (debug == true)
-                                cout << "did not make it.." << end
-                                     << endl; 
+                                cout << "did not make it.." << end << endl; 
                                 
                         }
                         else
@@ -971,8 +970,7 @@ public:
                                 populationTablePtr[ind][3] -= populationTablePtr[ind][3]; // substract what was left in the resource stock
 
                             if (debug == true)
-                                cout << "made it! Resource pool is now " << populationTablePtr[ind][3] << endl
-                                     << end; 
+                                cout << "made it! Resource pool is now " << populationTablePtr[ind][3] << endl << end; 
                             
                         }
                     } 
@@ -983,8 +981,7 @@ public:
         }
 
         if (debug == true)
-            cout << zz << " " << memberTypes[membersMatchingListsIndex] << " did not make it" <<  << endl
-                 << endl;
+            cout << zz << " " << memberTypes[membersMatchingListsIndex] << " did not make it" << endl << endl;
         
     }
 
@@ -2162,14 +2159,14 @@ int main(int argc, char **argv)
                 for (int i = 0; i < preyTypesNb; i++)
                 {    
                     if (timeStep >= preyIntro[i])
-                        preys[i]->survivalTrial(true);
+                        preys[i]->survivalTrial(true, true);
                 }
                 // prey1.getInfo();
                 // prey2.getInfo();
 
                 /* predators */
                 if (timeStep >= predIntro[0])
-                    pred1->survivalTrial(true);
+                    pred1->survivalTrial(true, true);
 
                 // for (int i = 0; i < predatorTypesNb; i++)
                 // {
