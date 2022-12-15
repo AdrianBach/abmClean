@@ -916,13 +916,17 @@ public:
 
         /* iterate through individuals */
         int ind = 0;
-        if (debug == true)
+        // if (debug == true)
             int zz = 0; // deaths counter
-        if (probabilistic == true) 
-        {
+        // if (probabilistic == true) 
+        // {
             float survivalProba; // declare a survival probability variable
             float randomNb; // declare a random number variable
-        }
+            float a = log(0.1) / float(maintenanceCost); // proba function coefficient
+        // }
+        
+        if (debug == true) 
+        	cout << "coeff a should be - 0.135 for preys, - 0.046 for preds and is " << a << endl << endl;
 
         while (ind < currentPopulationSize)
         {
@@ -945,45 +949,57 @@ public:
                         survivalProba = 0; // just for security
                     else
                     {
-                        survivalProba = 1 - exp(- log(0.1) / (float) maintenanceCost * (float) populationTablePtr[ind][3]);    // careful float * int, should work like that
+                        survivalProba = 1 - exp(-1 * a * float(populationTablePtr[ind][3]));    // careful float * int, should work like that
+                        
+                        if (debug == true)
+                        {
+                        	cout << "-1 * a = " << -1 * a << endl
+                        	     << "-1 * a * float(populationTablePtr[ind][3]) = " << -1 * a * float(populationTablePtr[ind][3]) << endl
+                        	     << "exp(-1 * a * float(populationTablePtr[ind][3])" << exp(-1 * a * float(populationTablePtr[ind][3])) << endl
+                        	     << "survivalProba: 1 - exp(-1 * a * float(populationTablePtr[ind][3])) = " << 1 - exp(-1 * a * float(populationTablePtr[ind][3])) << endl
+                        	     << endl;
+                        }
 
                         randomNb = randomNumberGenerator0to1(0, 1); // generate a random number between 0 and 1
+                    } // end if else condition on resource stock
 
-                        if (debug == true)
-                            cout << "prey number" << ind << "; resource stock " << populationTablePtr[ind][3] << endl 
-                                 << "survival proba is " << survivalProba << " and trial is " << randomNb << endl;
+			if (debug == true)
+			    cout << "prey number" << ind << "; resource stock " << populationTablePtr[ind][3] << endl 
+				 << "survival proba is " << survivalProba << " and trial is " << randomNb << endl;
 
-                        if (randomNb < survivalProba)
-                        {
-                            populationTablePtr[ind][4] = 0;     // update dead or alive info
-                            zz += 1;
+			if (randomNb > survivalProba)
+			{
+			    populationTablePtr[ind][4] = 0;     // update dead or alive info
+			    zz += 1;
 
-                            if (debug == true)
-                                cout << "did not make it.." << end << endl; 
-                                
-                        }
-                        else
-                        {
-                            if (populationTablePtr[ind][3] >= maintenanceCost)
-                                populationTablePtr[ind][3] -= maintenanceCost; // substract the maintenance cost to the resource stock
-                            else
-                                populationTablePtr[ind][3] -= populationTablePtr[ind][3]; // substract what was left in the resource stock
+			    if (debug == true)
+				cout << "did not make it.." << endl << endl; 
+				
+			}
+			else
+			{
+			    if (populationTablePtr[ind][3] >= maintenanceCost)
+				populationTablePtr[ind][3] -= maintenanceCost; // substract the maintenance cost to the resource stock
+			    else
+				populationTablePtr[ind][3] -= populationTablePtr[ind][3]; // substract what was left in the resource stock
 
-                            if (debug == true)
-                                cout << "made it! Resource pool is now " << populationTablePtr[ind][3] << endl << end; 
-                            
-                        }
-                    } 
-                }
-            }
+			    if (debug == true)
+				cout << "made it! Resource pool is now " << populationTablePtr[ind][3] << endl << endl; 
+			    
+			} // end if else condition on randomNb
+			
+                    } // end if else condition on probabistic 
+                    
+                } // end if alive
 
             ind++; // next individual
-        }
+            
+        } // end while loop on individuals
 
         if (debug == true)
             cout << zz << " " << memberTypes[membersMatchingListsIndex] << " did not make it" << endl << endl;
         
-    }
+    } // end function
 
     void reproductionTrial()
     {
