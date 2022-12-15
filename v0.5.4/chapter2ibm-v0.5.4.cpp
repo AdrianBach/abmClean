@@ -922,11 +922,12 @@ public:
         // {
             float survivalProba; // declare a survival probability variable
             float randomNb; // declare a random number variable
-            float a = log(0.1) / float(maintenanceCost); // proba function coefficient
+            float a = - log(0.1) / float(maintenanceCost); // proba function coefficient
         // }
         
-        if (debug == true) 
-        	cout << "coeff a should be - 0.135 for preys, - 0.046 for preds and is " << a << endl << endl;
+        /* if (debug == true) 
+        	cout << "coeff a should be 0.135 for preys, 0.046 for preds and is " << a << endl << endl;
+        */
 
         while (ind < currentPopulationSize)
         {
@@ -956,21 +957,22 @@ public:
                     {
                         survivalProba = 1 - exp(-1 * a * float(populationTablePtr[ind][3]));    // careful float * int, should work like that
                         
-                        if (debug == true)
+                        /*if (debug == true)
                         {
                         	cout << "-1 * a = " << -1 * a << endl
                         	     << "-1 * a * float(populationTablePtr[ind][3]) = " << -1 * a * float(populationTablePtr[ind][3]) << endl
-                        	     << "exp(-1 * a * float(populationTablePtr[ind][3])" << exp(-1 * a * float(populationTablePtr[ind][3])) << endl
+                        	     << "exp(-1 * a * float(populationTablePtr[ind][3]) = " << exp(-1 * a * float(populationTablePtr[ind][3])) << endl
                         	     << "survivalProba: 1 - exp(-1 * a * float(populationTablePtr[ind][3])) = " << 1 - exp(-1 * a * float(populationTablePtr[ind][3])) << endl
                         	     << endl;
                         }
+			*/ 
 
                         randomNb = randomNumberGenerator0to1(0, 1); // generate a random number between 0 and 1
 
                     } // end if else condition on resource stock
                 
                     if (debug == true)
-                        cout << "prey number" << ind << "; resource stock " << populationTablePtr[ind][3] << endl 
+                        cout << "animal number" << ind << "; resource stock " << populationTablePtr[ind][3] << endl 
                         << "survival proba is " << survivalProba << " and trial is " << randomNb << endl;
 
                     if (randomNb > survivalProba)
@@ -2185,14 +2187,14 @@ int main(int argc, char **argv)
                 for (int i = 0; i < preyTypesNb; i++)
                 {    
                     if (timeStep >= preyIntro[i])
-                        preys[i]->survivalTrial(true, true);
+                        preys[i]->survivalTrial(true, false);
                 }
                 // prey1.getInfo();
                 // prey2.getInfo();
 
                 /* predators */
                 if (timeStep >= predIntro[0])
-                    pred1->survivalTrial(true, true);
+                    pred1->survivalTrial(true, false);
 
                 // for (int i = 0; i < predatorTypesNb; i++)
                 // {
