@@ -941,12 +941,17 @@ public:
                         zz += 1;
                     }
                     else
+                    {
                         populationTablePtr[ind][3] -= maintenanceCost;  // update resource pool
+                    }
                 } 
                 else
                 {
-                    if (populationTablePtr[ind][3] < 0) 
+                    // calculate survival probability
+                    if (populationTablePtr[ind][3] < 0)
+                    {
                         survivalProba = 0; // just for security
+                    }   
                     else
                     {
                         survivalProba = 1 - exp(-1 * a * float(populationTablePtr[ind][3]));    // careful float * int, should work like that
@@ -961,36 +966,41 @@ public:
                         }
 
                         randomNb = randomNumberGenerator0to1(0, 1); // generate a random number between 0 and 1
+
                     } // end if else condition on resource stock
+                
+                    if (debug == true)
+                        cout << "prey number" << ind << "; resource stock " << populationTablePtr[ind][3] << endl 
+                        << "survival proba is " << survivalProba << " and trial is " << randomNb << endl;
 
-			if (debug == true)
-			    cout << "prey number" << ind << "; resource stock " << populationTablePtr[ind][3] << endl 
-				 << "survival proba is " << survivalProba << " and trial is " << randomNb << endl;
+                    if (randomNb > survivalProba)
+                    {
+                        populationTablePtr[ind][4] = 0;     // update dead or alive info
+                        zz += 1;
 
-			if (randomNb > survivalProba)
-			{
-			    populationTablePtr[ind][4] = 0;     // update dead or alive info
-			    zz += 1;
+                        if (debug == true)
+                        cout << "did not make it.." << endl << endl; 
+                        
+                    }
+                    else
+                    {
+                        if (populationTablePtr[ind][3] >= maintenanceCost)
+                        {
+                            populationTablePtr[ind][3] -= maintenanceCost; // substract the maintenance cost to the resource stock
+                        }
+                        else
+                        {
+                            populationTablePtr[ind][3] -= populationTablePtr[ind][3]; // substract what was left in the resource stock
+                        }
 
-			    if (debug == true)
-				cout << "did not make it.." << endl << endl; 
-				
-			}
-			else
-			{
-			    if (populationTablePtr[ind][3] >= maintenanceCost)
-				populationTablePtr[ind][3] -= maintenanceCost; // substract the maintenance cost to the resource stock
-			    else
-				populationTablePtr[ind][3] -= populationTablePtr[ind][3]; // substract what was left in the resource stock
-
-			    if (debug == true)
-				cout << "made it! Resource pool is now " << populationTablePtr[ind][3] << endl << endl; 
-			    
-			} // end if else condition on randomNb
+                        if (debug == true)
+                            cout << "made it! Resource pool is now " << populationTablePtr[ind][3] << endl << endl; 
+                        
+                    } // end if else condition on randomNb
 			
-                    } // end if else condition on probabistic 
+                } // end if else condition on probabistic 
                     
-                } // end if alive
+            } // end if alive
 
             ind++; // next individual
             
