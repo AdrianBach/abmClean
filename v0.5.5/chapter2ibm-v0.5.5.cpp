@@ -29,7 +29,7 @@ vector<string> preyTypes;          // prey1..n
 vector<float> preyMaxMove;         // now defined in % of landscape size?
 vector<int> preyMaxConsume;        // in resource units
 vector<int> preyMaintenanceCost;   //
-vector<int> preyExpectedOffspring; //
+vector<float> preyExpectedOffspring; //
 vector<int> preyReproCost;         //
 vector<int> preyIntro;             // 
 // frequency of reproduction
@@ -42,7 +42,7 @@ vector<int> predInitialDensities;  //
 vector<float> predMaxMove;         // NOT GOOD should rather be defined in % of landscape size CAREFUL the product has to stay int
 vector<int> predMaxConsume;        // in equivalent resources
 vector<int> predMaintenanceCost;   //
-vector<int> predExpectedOffspring; //
+vector<float> predExpectedOffspring; //
 vector<int> predReproCost;         //
 vector<int> predIntro;             // time of introduction of the predator
 // vector<float> predAsymm;           // ratio of preys' catch conversion into resources
@@ -104,7 +104,7 @@ double randomNumberGeneratorAny(double min, double max) // generates a random nu
     return res;
 }
 
-int randomSampleFromPoissonDist(int Mean)
+int randomSampleFromPoissonDist(float Mean)
 {
     int res;
 
@@ -778,7 +778,7 @@ private:
     int typeTag;           // a integer tag for each animal type
     float maxMove;         // max number of cells an animal can move by in each direction
     int reproductionCost;  // resources needed to reproduce
-    int expectedOffspring; // max number of offspring when passing reproduction trial
+    float expectedOffspring; // max number of offspring when passing reproduction trial
 
 protected:
     int landscapeSize;
@@ -794,7 +794,7 @@ public:
     int initialDensity;
     int **populationTablePtr; //
 
-    animals(int InitialDensity, int TypeTag, float MaxMove, int MaintenanceCost, int ReproductionCost, int LandscapeSize, int ExpectedOffspring, string *XYcoordinates, int *CellCodes) // initialise the constants shared by all animal types
+    animals(int InitialDensity, int TypeTag, float MaxMove, int MaintenanceCost, int ReproductionCost, int LandscapeSize, float ExpectedOffspring, string *XYcoordinates, int *CellCodes) // initialise the constants shared by all animal types
     {
 
         initialDensity = InitialDensity;
@@ -1201,7 +1201,7 @@ private:
     int maxConsumption; // max resource units the prey can consume in a time step
 
 public:
-    prey(int preyInitialDensity, int preyTypeTag, float preyMaxMovingDistance, int preyMaintenanceCost, int preyReproductionCost, int LandscapeSize, int preyExpectedOffspring, string *XYcoordinates, int *CellCodes) : animals(preyInitialDensity, preyTypeTag, preyMaxMovingDistance, preyMaintenanceCost, preyReproductionCost, LandscapeSize, preyExpectedOffspring, XYcoordinates, CellCodes) //
+    prey(int preyInitialDensity, int preyTypeTag, float preyMaxMovingDistance, int preyMaintenanceCost, int preyReproductionCost, int LandscapeSize, float preyExpectedOffspring, string *XYcoordinates, int *CellCodes) : animals(preyInitialDensity, preyTypeTag, preyMaxMovingDistance, preyMaintenanceCost, preyReproductionCost, LandscapeSize, preyExpectedOffspring, XYcoordinates, CellCodes) //
     {
     }
 
@@ -1353,7 +1353,7 @@ protected:
     vector<float> catchProbas;   // catch probability of each prey in diet
 
 public:
-    predator(int initialDensity, int typeTag, float maxMovingDistance, int predatorMaintenanceCost, int predatorReproductionCost, int LandscapeSize, int predatorExpectedOffspring, string *XYcoordinates, int *CellCodes) : animals(initialDensity, typeTag, maxMovingDistance, predatorMaintenanceCost, predatorReproductionCost, LandscapeSize, predatorExpectedOffspring, XYcoordinates, CellCodes) //
+    predator(int initialDensity, int typeTag, float maxMovingDistance, int predatorMaintenanceCost, int predatorReproductionCost, int LandscapeSize, float predatorExpectedOffspring, string *XYcoordinates, int *CellCodes) : animals(initialDensity, typeTag, maxMovingDistance, predatorMaintenanceCost, predatorReproductionCost, LandscapeSize, predatorExpectedOffspring, XYcoordinates, CellCodes) //
     {
     }
 
@@ -1912,11 +1912,11 @@ int main(int argc, char **argv)
 
     p++;
 
-    preyExpectedOffspring.push_back(atoi(argv[p]));
+    preyExpectedOffspring.push_back(atof(argv[p]));
 
     p++;
 
-    preyExpectedOffspring.push_back(atoi(argv[p]));
+    preyExpectedOffspring.push_back(atof(argv[p]));
 
     p++;
 
@@ -1961,7 +1961,7 @@ int main(int argc, char **argv)
 
     p++;
 
-    predExpectedOffspring.push_back(atoi(argv[p]));
+    predExpectedOffspring.push_back(atof(argv[p]));
 
     p++;
 
