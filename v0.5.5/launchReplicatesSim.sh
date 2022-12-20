@@ -34,8 +34,8 @@ pry_move_1=0.1  # argv[9] prey 1 max movement range in fraction of size
 pry_move_2=0.1  # argv[10] prey 2 movement range
 # pry_surv_1=3  # argv[13] prey 1 resource units needed to pass survival trial
 # pry_surv_2=3  # argv[14] prey 2 resource units needed to pass survival trial
-pry_offs_1=1    # argv[15] prey 1 max number of offspring
-pry_offs_2=1    # argv[16] prey 2 max number of offspring
+pry_offs_1=1.7    # argv[15] prey 1 max number of offspring
+pry_offs_2=1.5    # argv[16] prey 2 max number of offspring
 # pry_repr_1=5  # argv[17] prey 1 resource units needed to pass reproduction trial
 # pry_repr_2=5  # argv[18] prey 2 resource units needed to pass reproduction trial
 pry_intro_1=0   # argv[19]
@@ -45,7 +45,7 @@ pry_intro_2=0   # argv[20]
 prd_nb=1        # argv[21] number of predator types
 prd_init_1=5    # argv[22] predator 1 initial density in nb of individuals
 prd_move_1=0.1  # argv[23] predator 1 max movement range in fraction of size
-prd_offs_1=1    # argv[26] predator 1 max number of offspring
+prd_offs_1=0.9    # argv[26] predator 1 max number of offspring
 prd_intr_1=0    # argv[28] predator 1 time of introduction in the model
 # prd_asym_1=1  # argv[] asymmetry in prey1 to prey2 conversion rates
 prd_ctch_pry1_1=0.25  # argv[29] predator 1 prey1 catch probability
@@ -87,7 +87,7 @@ ratio=1
 prd_cvrt_pry2_1=$(($ratio*$prd_cvrt_pry1_1))  # argv[32] predator 1 prey1 resources/catch
 
 # name the simulation with only the variables of interest and their value
-sim_name="test-huntNew" # argv[1]
+sim_name="test-avgOfspFloat" # argv[1]
 
 ## Warning about timing of introduction ##
 #if [[ ( $P = "SFTP" && $PORT != "22" ) || ( $P = "FTPS" && $PORT != "990" && $PORT != "21" ) ]] ; then
