@@ -1755,7 +1755,7 @@ public:
                 cout << "Available preys vector:" << endl;
                 for (int i = 0; i < availablePreys.size(); i++)
                 {
-                    cout << availablePreys[i] << " ";
+                    cout << availablePreys[i]+1 << " ";
                 }
                 cout << endl
                      << endl;
@@ -2098,10 +2098,10 @@ int main(int argc, char **argv)
 
     while (timeStep <= timeMaxi)
     {
-        /* debug
+        /* debug */
         cout << "time step " << timeStep << endl
              << endl;
-        */
+        
 
         if (timeStep > 0)
         {
