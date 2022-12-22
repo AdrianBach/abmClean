@@ -1,4 +1,4 @@
-sim_name = test-avgOfspFloat 	 # argv[1] 
+sim_name = test-probSurv 	 # argv[1] 
 
 model version v0.5.5 
 
@@ -59,4 +59,4 @@ rep = 1
 
 rep 	 seed (arg[41]) 	 sim time (s) 	 sim time (h) 
 
-0 	 2622 			 0 		 0 
+0 	 29704 			 0 		 0 

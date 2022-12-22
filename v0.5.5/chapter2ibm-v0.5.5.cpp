@@ -1818,7 +1818,7 @@ public:
                 /* compare to the catch probability, if < catch, if > fail */
                 if (randomNb < catchProb)
                 {
-                    LandscapeTable[indCellCode][catchColumn] += 1;  increment corresponding catch cell in landscape table
+                    LandscapeTable[indCellCode][catchColumn] += 1;  // increment corresponding catch cell in landscape table
                     LandscapeTable[indCellCode][densColumn] -= 1;   // decrement density on the cell such that another predator cannot catch more individuals than there actually are on the cell
                     populationTablePtr[rowIndex][3] += convRate;    // increment predator resource pool
                                                                     //

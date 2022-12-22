@@ -87,7 +87,7 @@ ratio=1
 prd_cvrt_pry2_1=$(($ratio*$prd_cvrt_pry1_1))  # argv[32] predator 1 prey1 resources/catch
 
 # name the simulation with only the variables of interest and their value
-sim_name="test-avgOfspFloat" # argv[1]
+sim_name="test-probSurv" # argv[1]
 
 ## Warning about timing of introduction ##
 #if [[ ( $P = "SFTP" && $PORT != "22" ) || ( $P = "FTPS" && $PORT != "990" && $PORT != "21" ) ]] ; then
