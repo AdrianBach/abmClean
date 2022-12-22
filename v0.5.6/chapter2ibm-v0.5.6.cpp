@@ -1045,7 +1045,7 @@ public:
         }
     }
 
-    void updatePopulationTable(int timeStep, bool debug) // updates current pop size, creates a new table with updated information, replaces popTable with the updated version, reset offspring to 0, deletes the older version
+    void updatePopulationTable(int timeStep, bool debug) // , bool aging // updates current pop size, creates a new table with updated information, replaces popTable with the updated version, reset offspring to 0, deletes the older version
     {
 
         /* update current population size with deaths and offspring */
@@ -1086,15 +1086,22 @@ public:
         {
             int indDoAstatus = populationTablePtr[oldPopRow][4]; // get dead or alive status
             int indOffspring = populationTablePtr[oldPopRow][5]; // get offspring number
-            int indAge = populationTablePtr[oldPopRow][6];       // get age
+            
+            // if (aging == true)
+            // {
+                int indAge = populationTablePtr[oldPopRow][6];   // get age
+            // }
 
             if (indDoAstatus == 1 && newTabRow < currentPopulationSize) // if individual is alive and we don't override the new table's dimensions
             {
                 for (int col = 0; col < 5; col++)
                     newTablePtr[newTabRow][col] = populationTablePtr[oldPopRow][col]; // copy x y position cellCode resource pool and DoA status into new table
 
-                newTablePtr[newTabRow][5] = 0;          // reset offspring to zero in the new table
-                newTablePtr[newTabRow][6] = indAge + 1; // individual is one time step older in the new table
+                // if (aging == true)
+                // {
+                    newTablePtr[newTabRow][5] = 0;          // reset offspring to zero in the new table
+                    newTablePtr[newTabRow][6] = indAge + 1; // individual is one time step older in the new table
+                // }
 
                 newTabRow++; // increment new table row counter
             }
@@ -1278,7 +1285,7 @@ public:
 
     void countCatches(int **LandscapeTable, bool debug)
     {
-
+        int densColumn = indexInLandscape[membersMatchingListsIndex];
         int catchesColumn = indexInLandscape[membersMatchingListsIndex] + preyTypesNb; // get the catches column index in landscape table
 
         /* debug */
@@ -1307,8 +1314,6 @@ public:
                     cout << "there was " << catches << " " << memberTypes[membersMatchingListsIndex] << " caught on cell " << landRow << endl
                          << endl;
 
-                // vector<int> shuffledPop = shuffleOrder(currentPopulationSize); // shuffle the indexes of prey table
-
                 for (int ind = 0; ind < shuffledPop.size(); ind++) // iterate through population table individuals
                 {
                     int popRow = shuffledPop[ind];                   // get shuffled row index
@@ -1323,8 +1328,9 @@ public:
                             cout << memberTypes[membersMatchingListsIndex] << " number " << popRow << " is on cell " << landRow << " with DoA status " << DoAstatus << endl
                                  << endl;
 
-                        populationTablePtr[popRow][4] = 0; // update individual's dead or alive status
-                        catches--;                         // one less catch to take into account
+                        populationTablePtr[popRow][4] = 0;          // update individual's dead or alive status
+                        LandscapeTable[landRow][densColumn] -= 1;   // update density on cell
+                        catches--;                                  // one less catch to take into account
 
                         /* debug */
                         if (debug == true)
@@ -1332,6 +1338,7 @@ public:
                             cout << memberTypes[membersMatchingListsIndex] << " number " << popRow << "'s DoA status is now " << populationTablePtr[popRow][4] << endl;
                             // if (populationTablePtr[popRow][3] < maintenanceCost)
                             //     cout << "but it did not have enough resources to survive anyway" << endl;
+                            cout << memberTypes[membersMatchingListsIndex] << " density on cell " << landRow << " is now " << LandscapeTable[landRow][densColumn] << endl;
                             cout << catches << " " << memberTypes[membersMatchingListsIndex] << " catches left to count on cell " << landRow << endl
                                  << endl;
                         }
@@ -2166,7 +2173,7 @@ int main(int argc, char **argv)
 
             /* predators */
             if (timeStep >= predIntro[0])
-                pred1->huntNew(world.landscapeTablePtr, true);
+                pred1->huntNew(world.landscapeTablePtr, false);
 
             // for (int i = 0; i < predatorTypesNb; i++)
             // {
@@ -2178,9 +2185,9 @@ int main(int argc, char **argv)
             /* -- counting catches -- */
 
             for (int i = 0; i < preyTypesNb; i++)
-            {
+            {   
                 if (timeStep >= preyIntro[i])
-                    preys[i]->countCatches(world.landscapeTablePtr, false);
+                    preys[i]->countCatches(world.landscapeTablePtr, true);
             }
 
             // prey1.getInfo();
