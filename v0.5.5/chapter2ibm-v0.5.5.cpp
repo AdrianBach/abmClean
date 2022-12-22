@@ -1683,7 +1683,7 @@ public:
             for (int i = 0; i < preysDensity.size(); i++)
             {
                 /* repeat preyType number as often as their density on the cell*/
-                for (int j = 0; j < preysDensity[i]; i++)
+                for (int j = 0; j < preysDensity[i]; j++)
                 {
                     availablePreys.push_back(i);
                 }
@@ -1694,7 +1694,7 @@ public:
                 cout << "Available preys vector before applying pred's behaviour:" << endl;
                 for (int i = 0; i < availablePreys.size(); i++)
                 {
-                    cout << availablePreys[i]+1 << " ";
+                    cout << availablePreys[i] << " ";
                 }
                 cout << endl
                      << endl;
@@ -1777,7 +1777,7 @@ public:
                 cout << "Available preys vector after applying pred's behaviour:" << endl;
                 for (int i = 0; i < availablePreys.size(); i++)
                 {
-                    cout << availablePreys[i]+1 << " ";
+                    cout << availablePreys[i] << " ";
                 }
                 cout << endl
                      << endl;
