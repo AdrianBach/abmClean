@@ -1802,9 +1802,9 @@ public:
 
                 if (debug == true)
                 {
-                    cout << "searching for prey " << prey+1 << endl
+                    cout << "searching for prey " << prey << endl
                          << "its catch counting column in landscape table is number " << catchColumn << endl
-                         << "its density on this cell is " << dens << endl
+                         // << "its density on this cell is " << dens << endl
                          << endl;
                 }
 
@@ -1818,7 +1818,7 @@ public:
                 /* compare to the catch probability, if < catch, if > fail */
                 if (randomNb < catchProb)
                 {
-                    LandscapeTable[indCellCode][catchColumn] += 1;  // increment corresponding catch cell in landscape table
+                    LandscapeTable[indCellCode][catchColumn] += 1;  increment corresponding catch cell in landscape table
                     LandscapeTable[indCellCode][densColumn] -= 1;   // decrement density on the cell such that another predator cannot catch more individuals than there actually are on the cell
                     populationTablePtr[rowIndex][3] += convRate;    // increment predator resource pool
                                                                     //
@@ -1847,10 +1847,10 @@ public:
                         cout << "No more prey situated column " << densColumn << " in landscape table on cell " << indCellCode << "." << endl
                                 << endl;
                     if (dailyCons >= dailyPredMaxConsumption)
-                        cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this time step." << endl
+                        cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has eaten enough for this time step." << endl
                                 << endl;
                     if (predCons >= predMaxConsumption)
-                        cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl
+                        cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl
                                 << endl;
                 }
                 

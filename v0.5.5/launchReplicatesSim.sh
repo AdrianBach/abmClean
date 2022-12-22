@@ -28,8 +28,8 @@ max_cell=5 # max expected number of preys of each kind per cell # if 2.5, betwee
 
 # prey variables
 pry_nb=2        # argv[6] number of prey types
-pry_init_1=100   # argv[7] prey 1 initial density in nb of individuals
-pry_init_2=100   # argv[8] prey 2 initial density
+pry_init_1=50   # argv[7] prey 1 initial density in nb of individuals
+pry_init_2=50   # argv[8] prey 2 initial density
 pry_move_1=0.1  # argv[9] prey 1 max movement range in fraction of size
 pry_move_2=0.1  # argv[10] prey 2 movement range
 # pry_surv_1=3  # argv[13] prey 1 resource units needed to pass survival trial
