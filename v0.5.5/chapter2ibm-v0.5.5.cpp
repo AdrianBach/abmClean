@@ -2120,10 +2120,10 @@ int main(int argc, char **argv)
 
     while (timeStep <= timeMaxi)
     {
-        /* debug */
+        /* debug 
         cout << "time step " << timeStep << endl
              << endl;
-        
+        */
 
         if (timeStep > 0)
         {
@@ -2188,7 +2188,7 @@ int main(int argc, char **argv)
 
             /* predators */
             if (timeStep >= predIntro[0])
-                pred1->huntNew(world.landscapeTablePtr, true);
+                pred1->huntNew(world.landscapeTablePtr, false);
 
             // for (int i = 0; i < predatorTypesNb; i++)
             // {
@@ -2216,14 +2216,14 @@ int main(int argc, char **argv)
                 for (int i = 0; i < preyTypesNb; i++)
                 {    
                     if (timeStep >= preyIntro[i])
-                        preys[i]->survivalTrial(true, false);
+                        preys[i]->survivalTrial(true, true);
                 }
                 // prey1.getInfo();
                 // prey2.getInfo();
 
                 /* predators */
                 if (timeStep >= predIntro[0])
-                    pred1->survivalTrial(true, false);
+                    pred1->survivalTrial(true, true);
 
                 // for (int i = 0; i < predatorTypesNb; i++)
                 // {
