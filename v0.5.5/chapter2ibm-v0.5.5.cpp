@@ -1667,7 +1667,7 @@ public:
             if (debug == true)
             {
                 cout << "Available preys density vector:" << endl;
-                for (int i = 0; i < availablePreys.size(); i++)
+                for (int i = 0; i < preysDensity.size(); i++)
                 {
                     cout << preysDensity[i] << " ";
                 }

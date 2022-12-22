@@ -133,7 +133,7 @@ cd $sim_name
 p=1
 printf "sim_name = $sim_name \t # argv[$p] \n\n" >> paramFile.txt
 p=$(($p+1))
-printf "model version v0.5.0 \n\n" >> paramFile.txt
+printf "model version v0.5.5 \n\n" >> paramFile.txt
 printf "# landscape variables\n" >> paramFile.txt
 printf "size = $size \t # argv[$p] world's side size\n" >> paramFile.txt
 p=$(($p+1))
