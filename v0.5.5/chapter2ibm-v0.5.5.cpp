@@ -1664,6 +1664,17 @@ public:
                 preysDensity.push_back(LandscapeTable[indCellCode][densColumn]);
             }
 
+            if (debug == true)
+            {
+                cout << "Available preys density vector:" << endl;
+                for (int i = 0; i < availablePreys.size(); i++)
+                {
+                    cout << preysDensity[i] << " ";
+                }
+                cout << endl
+                     << endl;
+            }
+
             /* vector of available preys on cell */
             vector<int> availablePreys;
 
@@ -1676,6 +1687,17 @@ public:
                 {
                     availablePreys.push_back(i);
                 }
+            }
+
+            if (debug == true)
+            {
+                cout << "Available preys vector before applying pred's behaviour:" << endl;
+                for (int i = 0; i < availablePreys.size(); i++)
+                {
+                    cout << availablePreys[i]+1 << " ";
+                }
+                cout << endl
+                     << endl;
             }
             
             if (predSpecific[0] == false)
@@ -1752,7 +1774,7 @@ public:
 
             if (debug == true)
             {
-                cout << "Available preys vector:" << endl;
+                cout << "Available preys vector after applying pred's behaviour:" << endl;
                 for (int i = 0; i < availablePreys.size(); i++)
                 {
                     cout << availablePreys[i]+1 << " ";
