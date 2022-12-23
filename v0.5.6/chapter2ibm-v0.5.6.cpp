@@ -908,7 +908,7 @@ public:
         }
     }
 
-    void survivalTrial(bool probabilistic, bool debug)
+    void survivalTrial(string relationship, bool debug)
     {
         if (debug == true)
             cout << memberTypes[membersMatchingListsIndex] << " survival trials" << endl
@@ -934,76 +934,90 @@ public:
         {
             if (populationTablePtr[ind][4] == 1) // if individual is alive
             {
-                if (probabilistic == false)
+                switch (relationship)
                 {
-                    /* if resonsume < maintenance cost -> change deadOrAlive to 0 else remove maintenance cost from the individual's resource pool */
-                    if (populationTablePtr[ind][3] < maintenanceCost)
-                    {
-                        populationTablePtr[ind][4] = 0;     // update dead or alive
-                        zz += 1;                            // update death count
-                    }
-                    else
-                    {
-                        populationTablePtr[ind][3] -= maintenanceCost;  // update resource pool
-                    }
-                } 
-                else
-                {
-                    // calculate survival probability
-                    if (populationTablePtr[ind][3] < 0)
-                    {
-                        survivalProba = 0; // just for security
-
-                        cout << "WARNING! animal number " << ind << " resource stock is < 0" << endl << endl;
-                    }   
-                    else
-                    {
-                        survivalProba = 1 - b * exp(-1 * a * float(populationTablePtr[ind][3]));    // careful float * int, should work like that
-                        
-                        /*if (debug == true)
+                    case 'cond':
+                        /* if resonsume < maintenance cost -> change deadOrAlive to 0 else remove maintenance cost from the individual's resource pool */
+                        if (populationTablePtr[ind][3] < maintenanceCost)
                         {
-                        	cout << "-1 * a = " << -1 * a << endl
-                        	     << "-1 * a * float(populationTablePtr[ind][3]) = " << -1 * a * float(populationTablePtr[ind][3]) << endl
-                        	     << "exp(-1 * a * float(populationTablePtr[ind][3]) = " << exp(-1 * a * float(populationTablePtr[ind][3])) << endl
-                        	     << "survivalProba: 1 - exp(-1 * a * float(populationTablePtr[ind][3])) = " << 1 - exp(-1 * a * float(populationTablePtr[ind][3])) << endl
-                        	     << endl;
-                        }
-			*/ 
-
-                        randomNb = randomNumberGenerator0to1(0, 1); // generate a random number between 0 and 1
-
-                    } // end if else condition on resource stock
-                
-                    if (debug == true)
-                        cout << "animal number" << ind << "; resource stock " << populationTablePtr[ind][3] << endl 
-                             << "survival proba is " << survivalProba << " and trial is " << randomNb << endl;
-
-                    if (randomNb > survivalProba)
-                    {
-                        populationTablePtr[ind][4] = 0;     // update dead or alive info
-                        zz += 1;                            // update death count
-
-                        if (debug == true)
-                        cout << "did not make it.." << endl << endl; 
-                        
-                    }
-                    else
-                    {
-                        if (populationTablePtr[ind][3] >= maintenanceCost)
-                        {
-                            populationTablePtr[ind][3] -= maintenanceCost; // substract the maintenance cost to the resource stock
+                            survivalProba = 0;
                         }
                         else
                         {
-                            populationTablePtr[ind][3] -= populationTablePtr[ind][3]; // substract what was left in the resource stock
+                            survivalProba = 1; 
                         }
+                        break;
 
-                        if (debug == true)
-                            cout << "made it! Resource pool is now " << populationTablePtr[ind][3] << endl << endl; 
-                        
-                    } // end if else condition on randomNb
-			
-                } // end if else condition on probabistic 
+                    case 'lin':
+                        // calculate survival probability
+                        if (populationTablePtr[ind][3] < maintenanceCost)
+                        {
+                            survivalProba = (0.8 / float(maintenanceCost)) * float(populationTablePtr[ind][3]) + 0.1;    // careful float * int, should work like that. NOT GOOD NOT GOOD hard coded p(surv) when resource stock = 0 and = maintenanceCost
+                        }
+                        else
+                        {
+                            survivalProba = 1 - b * exp(-1 * a * float(populationTablePtr[ind][3]));    // careful float * int, should work like that
+                        }
+                        break;
+
+                    case 'expNeg':
+                        // calculate survival probability
+                        survivalProba = 1 - b * exp(-1 * a * float(populationTablePtr[ind][3]));    // careful float * int, should work like that
+                        break;
+
+                    case 'expPos':
+                        // calculate survival probability
+                        if (populationTablePtr[ind][3] < maintenanceCost)
+                        {
+                            survivalProba = (1 - b) * exp(a * float(populationTablePtr[ind][3]));    // careful float * int, should work like that. NOT GOOD NOT GOOD hard coded p(surv) when resource stock = 0 and = maintenanceCost
+                        }
+                        else
+                        {
+                            survivalProba = 1 - b * exp(-1 * a * float(populationTablePtr[ind][3]));    // careful float * int, should work like that
+                        }
+                        break;
+                    
+                    default:    // conditional
+                        /* if resonsume < maintenance cost -> change deadOrAlive to 0 else remove maintenance cost from the individual's resource pool */
+                        if (populationTablePtr[ind][3] < maintenanceCost)
+                        {
+                            survivalProba = 0;
+                        }
+                        else
+                        {
+                            survivalProba = 1; 
+                        }
+                        break;
+                } // end of switch(relationship)
+
+                randomNb = randomNumberGenerator0to1(0, 1); // generate a random number between 0 and 1
+
+                if (debug == true)
+                    cout << "animal number" << ind << "; resource stock " << populationTablePtr[ind][3] << endl 
+                        << "survival proba is " << survivalProba << " and trial is " << randomNb << endl;
+
+                if (randomNb > survivalProba)
+                {
+                    populationTablePtr[ind][4] = 0;     // update dead or alive info
+                    zz += 1;                            // update death count
+
+                    if (debug == true)
+                    cout << "did not make it.." << endl << endl; 
+                }
+                else
+                {
+                    if (populationTablePtr[ind][3] >= maintenanceCost)
+                    {
+                        populationTablePtr[ind][3] -= maintenanceCost; // substract the maintenance cost to the resource stock
+                    }
+                    else
+                    {
+                        populationTablePtr[ind][3] -= populationTablePtr[ind][3]; // substract what was left in the resource stock
+                    }
+
+                    if (debug == true)
+                        cout << "made it! Resource pool is now " << populationTablePtr[ind][3] << endl << endl; 
+                } // end if else condition on randomNb
                     
             } // end if alive
 
@@ -1045,7 +1059,7 @@ public:
         }
     }
 
-    void updatePopulationTable(int timeStep, bool debug) // , bool aging // updates current pop size, creates a new table with updated information, replaces popTable with the updated version, reset offspring to 0, deletes the older version
+    void updatePopulationTable(int timeStep, bool debug) // updates current pop size, creates a new table with updated information, replaces popTable with the updated version, reset offspring to 0, deletes the older version
     {
 
         /* update current population size with deaths and offspring */
@@ -1086,22 +1100,15 @@ public:
         {
             int indDoAstatus = populationTablePtr[oldPopRow][4]; // get dead or alive status
             int indOffspring = populationTablePtr[oldPopRow][5]; // get offspring number
-            
-            // if (aging == true)
-            // {
-                int indAge = populationTablePtr[oldPopRow][6];   // get age
-            // }
+            int indAge = populationTablePtr[oldPopRow][6];       // get age
 
             if (indDoAstatus == 1 && newTabRow < currentPopulationSize) // if individual is alive and we don't override the new table's dimensions
             {
                 for (int col = 0; col < 5; col++)
                     newTablePtr[newTabRow][col] = populationTablePtr[oldPopRow][col]; // copy x y position cellCode resource pool and DoA status into new table
 
-                // if (aging == true)
-                // {
-                    newTablePtr[newTabRow][5] = 0;          // reset offspring to zero in the new table
-                    newTablePtr[newTabRow][6] = indAge + 1; // individual is one time step older in the new table
-                // }
+                newTablePtr[newTabRow][5] = 0;          // reset offspring to zero in the new table
+                newTablePtr[newTabRow][6] = indAge + 1; // individual is one time step older in the new table
 
                 newTabRow++; // increment new table row counter
             }
@@ -1285,7 +1292,7 @@ public:
 
     void countCatches(int **LandscapeTable, bool debug)
     {
-        int densColumn = indexInLandscape[membersMatchingListsIndex];
+
         int catchesColumn = indexInLandscape[membersMatchingListsIndex] + preyTypesNb; // get the catches column index in landscape table
 
         /* debug */
@@ -1314,6 +1321,8 @@ public:
                     cout << "there was " << catches << " " << memberTypes[membersMatchingListsIndex] << " caught on cell " << landRow << endl
                          << endl;
 
+                // vector<int> shuffledPop = shuffleOrder(currentPopulationSize); // shuffle the indexes of prey table
+
                 for (int ind = 0; ind < shuffledPop.size(); ind++) // iterate through population table individuals
                 {
                     int popRow = shuffledPop[ind];                   // get shuffled row index
@@ -1328,9 +1337,8 @@ public:
                             cout << memberTypes[membersMatchingListsIndex] << " number " << popRow << " is on cell " << landRow << " with DoA status " << DoAstatus << endl
                                  << endl;
 
-                        populationTablePtr[popRow][4] = 0;          // update individual's dead or alive status
-                        LandscapeTable[landRow][densColumn] -= 1;   // update density on cell
-                        catches--;                                  // one less catch to take into account
+                        populationTablePtr[popRow][4] = 0; // update individual's dead or alive status
+                        catches--;                         // one less catch to take into account
 
                         /* debug */
                         if (debug == true)
@@ -1338,7 +1346,6 @@ public:
                             cout << memberTypes[membersMatchingListsIndex] << " number " << popRow << "'s DoA status is now " << populationTablePtr[popRow][4] << endl;
                             // if (populationTablePtr[popRow][3] < maintenanceCost)
                             //     cout << "but it did not have enough resources to survive anyway" << endl;
-                            cout << memberTypes[membersMatchingListsIndex] << " density on cell " << landRow << " is now " << LandscapeTable[landRow][densColumn] << endl;
                             cout << catches << " " << memberTypes[membersMatchingListsIndex] << " catches left to count on cell " << landRow << endl
                                  << endl;
                         }
@@ -1671,6 +1678,17 @@ public:
                 preysDensity.push_back(LandscapeTable[indCellCode][densColumn]);
             }
 
+            if (debug == true)
+            {
+                cout << "Available preys density vector:" << endl;
+                for (int i = 0; i < preysDensity.size(); i++)
+                {
+                    cout << preysDensity[i] << " ";
+                }
+                cout << endl
+                     << endl;
+            }
+
             /* vector of available preys on cell */
             vector<int> availablePreys;
 
@@ -1679,10 +1697,21 @@ public:
             for (int i = 0; i < preysDensity.size(); i++)
             {
                 /* repeat preyType number as often as their density on the cell*/
-                for (int j = 0; j < preysDensity[i]; i++)
+                for (int j = 0; j < preysDensity[i]; j++)
                 {
                     availablePreys.push_back(i);
                 }
+            }
+
+            if (debug == true)
+            {
+                cout << "Available preys vector before applying pred's behaviour:" << endl;
+                for (int i = 0; i < availablePreys.size(); i++)
+                {
+                    cout << availablePreys[i] << " ";
+                }
+                cout << endl
+                     << endl;
             }
             
             if (predSpecific[0] == false)
@@ -1759,7 +1788,7 @@ public:
 
             if (debug == true)
             {
-                cout << "Available preys vector:" << endl;
+                cout << "Available preys vector after applying pred's behaviour:" << endl;
                 for (int i = 0; i < availablePreys.size(); i++)
                 {
                     cout << availablePreys[i] << " ";
@@ -1787,9 +1816,9 @@ public:
 
                 if (debug == true)
                 {
-                    cout << "searching for prey " << prey+1 << endl
+                    cout << "searching for prey " << prey << endl
                          << "its catch counting column in landscape table is number " << catchColumn << endl
-                         << "its density on this cell is " << dens << endl
+                         // << "its density on this cell is " << dens << endl
                          << endl;
                 }
 
@@ -1832,10 +1861,10 @@ public:
                         cout << "No more prey situated column " << densColumn << " in landscape table on cell " << indCellCode << "." << endl
                                 << endl;
                     if (dailyCons >= dailyPredMaxConsumption)
-                        cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this time step." << endl
+                        cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has eaten enough for this time step." << endl
                                 << endl;
                     if (predCons >= predMaxConsumption)
-                        cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl
+                        cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl
                                 << endl;
                 }
                 
@@ -2105,7 +2134,7 @@ int main(int argc, char **argv)
 
     while (timeStep <= timeMaxi)
     {
-        /* debug
+        /* debug 
         cout << "time step " << timeStep << endl
              << endl;
         */
@@ -2185,9 +2214,9 @@ int main(int argc, char **argv)
             /* -- counting catches -- */
 
             for (int i = 0; i < preyTypesNb; i++)
-            {   
+            {
                 if (timeStep >= preyIntro[i])
-                    preys[i]->countCatches(world.landscapeTablePtr, true);
+                    preys[i]->countCatches(world.landscapeTablePtr, false);
             }
 
             // prey1.getInfo();
@@ -2201,14 +2230,14 @@ int main(int argc, char **argv)
                 for (int i = 0; i < preyTypesNb; i++)
                 {    
                     if (timeStep >= preyIntro[i])
-                        preys[i]->survivalTrial(true, false);
+                        preys[i]->survivalTrial('lin', true);
                 }
                 // prey1.getInfo();
                 // prey2.getInfo();
 
                 /* predators */
                 if (timeStep >= predIntro[0])
-                    pred1->survivalTrial(true, false);
+                    pred1->survivalTrial('lin', true);
 
                 // for (int i = 0; i < predatorTypesNb; i++)
                 // {
