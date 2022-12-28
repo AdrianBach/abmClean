@@ -424,7 +424,7 @@ public:                      // can be used / called in the main function
     int **landscapeTablePtr; // pointer to the landscape table
     string *XYcoordinates;   // landscape matching lists
     int *cellCode;           //
-    
+
     landscape(int size, vector<int> maxResourceVec) // constructor: function that creates objects of the class by assigning values to or initializing the variables
     {
         Size = size;
@@ -948,8 +948,7 @@ public:
                 switch (relationship)
                 {
                     case 1:	// conditional
-
-                    default : // conditional
+                    // default : // conditional
                         /* if resonsume < maintenance cost -> change deadOrAlive to 0 else remove maintenance cost from the individual's resource pool */
                         if (populationTablePtr[ind][3] < maintenanceCost)
                         {
@@ -1000,17 +999,17 @@ public:
                         
                         break;
 
-                    // default:    // conditional
-                    //     /* if resonsume < maintenance cost -> change deadOrAlive to 0 else remove maintenance cost from the individual's resource pool */
-                    //     if (populationTablePtr[ind][3] < maintenanceCost)
-                    //     {
-                    //         survivalProba = 0;
-                    //     }
-                    //     else
-                    //     {
-                    //         survivalProba = 1; 
-                    //     }
-                    //     break;
+                    default:    // conditional
+                        /* if resonsume < maintenance cost -> change deadOrAlive to 0 else remove maintenance cost from the individual's resource pool */
+                        if (populationTablePtr[ind][3] < maintenanceCost)
+                        {
+                            survivalProba = 0;
+                        }
+                        else
+                        {
+                            survivalProba = 1; 
+                        }
+                        break;
                 } // end of switch(relationship)
 
                 randomNb = randomNumberGenerator0to1(0, 1); // generate a random number between 0 and 1
