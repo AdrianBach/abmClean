@@ -951,16 +951,17 @@ public:
                 switch (relationship)
                 {
                     case 1:	// conditional
-                    // default : // conditional
-                    /* if resonsume < maintenance cost -> change deadOrAlive to 0 else remove maintenance cost from the individual's resource pool */
-                    if (populationTablePtr[ind][3] < maintenanceCost)
-                    {
-                            survivalProba = 0;
-                    }
-                    else
-                    {
-                            survivalProba = 1; 
-                    }
+                    
+                    default : // conditional
+                        /* if resonsume < maintenance cost -> change deadOrAlive to 0 else remove maintenance cost from the individual's resource pool */
+                        if (populationTablePtr[ind][3] < maintenanceCost)
+                        {
+                                survivalProba = 0;
+                        }
+                        else
+                        {
+                                survivalProba = 1; 
+                        }
                         break;
 
                     case 2:	// linear
@@ -969,9 +970,9 @@ public:
                         {
                             c = (pmC - p0) / float(maintenanceCost);
                             survivalProba = c * float(populationTablePtr[ind][3]) + p0;    // careful float * int, should work like that. NOT GOOD NOT GOOD hard coded p(surv) when resource stock = 0 and = maintenanceCost
-                } 
-                else
-                {
+                        } 
+                        else
+                        {
                             survivalProba = 1 - b * exp(-1 * a * float(populationTablePtr[ind][3]));    // careful float * int, should work like that
                         }
                         break;
@@ -984,12 +985,12 @@ public:
                     case 4:	// exponential positive
                         // calculate survival probability
                         if (populationTablePtr[ind][3] < maintenanceCost)
-                    {
+                        {
                             c = -1 * log(pmC / p0) / maintenanceCost;
                             survivalProba = p0 * exp(c * float(populationTablePtr[ind][3]));    // careful float * int, should work like that. NOT GOOD NOT GOOD hard coded p(surv) when resource stock = 0 and = maintenanceCost
-                    }   
-                    else
-                    {
+                        }   
+                        else
+                        {
                         survivalProba = 1 - b * exp(-1 * a * float(populationTablePtr[ind][3]));    // careful float * int, should work like that
                         }
                         break;
@@ -1002,47 +1003,47 @@ public:
                         
                         break;
 
-                    default:    // conditional
-                        /* if resonsume < maintenance cost -> change deadOrAlive to 0 else remove maintenance cost from the individual's resource pool */
-                        if (populationTablePtr[ind][3] < maintenanceCost)
-                        {
-                            survivalProba = 0;
-                        }
-                        else
-                        {
-                            survivalProba = 1; 
-                        }
-                        break;
+                    // default:    // conditional
+                    //     /* if resonsume < maintenance cost -> change deadOrAlive to 0 else remove maintenance cost from the individual's resource pool */
+                    //     if (populationTablePtr[ind][3] < maintenanceCost)
+                    //     {
+                    //         survivalProba = 0;
+                    //     }
+                    //     else
+                    //     {
+                    //         survivalProba = 1; 
+                    //     }
+                    //     break;
                 } // end of switch(relationship)
 
-                        randomNb = randomNumberGenerator0to1(0, 1); // generate a random number between 0 and 1
+                randomNb = randomNumberGenerator0to1(0, 1); // generate a random number between 0 and 1
+
+                if (debug == true)
+                    cout << "animal number" << ind << "; resource stock " << populationTablePtr[ind][3] << endl 
+                            << "survival proba is " << survivalProba << " and trial is " << randomNb << endl;
+
+                if (randomNb > survivalProba)
+                {
+                    populationTablePtr[ind][4] = 0;     // update dead or alive info
+                    zz += 1;                            // update death count
 
                     if (debug == true)
-                        cout << "animal number" << ind << "; resource stock " << populationTablePtr[ind][3] << endl 
-                             << "survival proba is " << survivalProba << " and trial is " << randomNb << endl;
-
-                    if (randomNb > survivalProba)
+                    cout << "did not make it.." << endl << endl; 
+                }
+                else
+                {
+                    if (populationTablePtr[ind][3] >= maintenanceCost)
                     {
-                        populationTablePtr[ind][4] = 0;     // update dead or alive info
-                        zz += 1;                            // update death count
-
-                        if (debug == true)
-                        cout << "did not make it.." << endl << endl; 
+                        populationTablePtr[ind][3] -= maintenanceCost; // substract the maintenance cost to the resource stock
                     }
                     else
                     {
-                        if (populationTablePtr[ind][3] >= maintenanceCost)
-                        {
-                            populationTablePtr[ind][3] -= maintenanceCost; // substract the maintenance cost to the resource stock
-                        }
-                        else
-                        {
-                            populationTablePtr[ind][3] -= populationTablePtr[ind][3]; // substract what was left in the resource stock
-                        }
+                        populationTablePtr[ind][3] -= populationTablePtr[ind][3]; // substract what was left in the resource stock
+                    }
 
-                        if (debug == true)
-                            cout << "made it! Resource pool is now " << populationTablePtr[ind][3] << endl << endl; 
-                    } // end if else condition on randomNb
+                    if (debug == true)
+                        cout << "made it! Resource pool is now " << populationTablePtr[ind][3] << endl << endl; 
+                } // end if else condition on randomNb
 			
             } // end if alive
 
