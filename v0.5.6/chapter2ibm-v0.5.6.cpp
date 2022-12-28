@@ -404,10 +404,6 @@ create a class:
 class landscape
 {
     /* list of landscape-specific variables */
-
-protected:                          // variables that should not be modified directly, nor accessed from the main function, but accessible to the other classes
-    int landscapeMatchingListsSize; //
-
 private:                     // variables that should not be modified directly, nor accessed from the main function
     int Size;                // side of the squared lanscape in number of cells [0;+inf[
     vector<int> MaxResource; // max amount of resources on a cell
@@ -419,6 +415,9 @@ private:                     // variables that should not be modified directly, 
     int predatorColumnStart; //
     fstream resultsTable;    // file to write results in
     fstream snapshotTable;   // file to save all relevant landscape cell info
+
+protected:                          // variables that should not be modified directly, nor accessed from the main function, but accessible to the other classes
+    int landscapeMatchingListsSize; //
 
 public:                      // can be used / called in the main function
     int **landscapeTablePtr; // pointer to the landscape table
@@ -771,14 +770,6 @@ public:                      // can be used / called in the main function
 
 class animals
 {
-protected:
-    int landscapeSize;
-    int maintenanceCost; // resources needed to survive a time step
-
-    /* matching informations */
-    int membersMatchingListsIndex;    //
-    vector<int> dietLandscapeIndexes; // array containing their column index in the landscape table
-
 private:
     /* useful variables for memory allocation */
     int columnNb; // number of info stored in the table
@@ -790,26 +781,34 @@ private:
     float expectedOffspring; // max number of offspring when passing reproduction trial
 
     /* variables for survival trial function */
-    float survivalProba;                                        // declare a survival probability variable
-    float randomNb;                                             // declare a random number variable
-    float p0 = 0.1;                                             // survival probability when resource stock = 0. NOT GOOD hard coded
-    float pmC = 0.9;                                            // survival probability when resource stock = maintenance cost. NOT GOOD hard coded
-    float b = 1 - p0;                                           // declare exponential negative proba function coeff b
-    float a = - log((1-pmC) / b) / float(maintenanceCost);      // declare exponential negative proba function coefficient a
-    float c;                                                    // declare other proba function coefficient c
-    float d;                                                    // declare other proba function coefficient d 
+    float survivalProba;    // declare a survival probability variable
+    float randomNb;         // declare a random number variable
+    float p0 = 0.1;         // survival probability when resource stock = 0. NOT GOOD hard coded
+    float pmC = 0.9;        // survival probability when resource stock = maintenance cost. NOT GOOD hard coded
+    float a;                // declare exponential negative proba function coefficient a
+    float b;                // declare exponential negative proba function coeff b
+    float c;                // declare other proba function coefficient c
+    float d;                // declare other proba function coefficient d 
 
     /* variables for update table function */
     int oldPopulationSize;      // variable to store current population size for function purpose                                                        // store previous population size
     int deadInds;               // number of dead ind in pop
     int newInds;                // sum of all offspring produced
-    int **newTablePtr;          // pointer to a new population table
+    // int **newTablePtr;          // pointer to a new population table
     int indDoAstatus;           // 
     int indOffspring;           //
     int indAge;                 //
 
     /* variables for measure density function */
     int colIndex;   // population column index in landscapeTable
+
+protected:
+    int landscapeSize;
+    int maintenanceCost; // resources needed to survive a time step
+
+    /* matching informations */
+    int membersMatchingListsIndex;    //
+    vector<int> dietLandscapeIndexes; // array containing their column index in the landscape table
 
 public:
     /* population level variables */
@@ -937,6 +936,10 @@ public:
             cout << memberTypes[membersMatchingListsIndex] << " survival trials" << endl
                  << endl;                                                  // declare proba function coefficient d
         
+        /* compute coefficients */
+        b = 1 - p0;
+        a = - log((1-pmC) / b) / float(maintenanceCost);
+
         int ind = 0;    // initiate individuals counter
         int zz = 0;     // initiate deaths counter
 
@@ -1108,7 +1111,7 @@ public:
         }
 
         /* allocate memory to a new table of the right size */
-        newTablePtr = new int *[currentPopulationSize];
+        int **newTablePtr = new int *[currentPopulationSize];
         for (int row = 0; row < currentPopulationSize; row++)
         {
             newTablePtr[row] = new int[columnNb];
