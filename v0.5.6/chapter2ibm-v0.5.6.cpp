@@ -817,6 +817,7 @@ private:
     /* variables for measure density function */
     int colIndex;   // population column index in landscapeTable
 
+public:
     animals(int InitialDensity, int TypeTag, float MaxMove, int MaintenanceCost, int ReproductionCost, int LandscapeSize, float ExpectedOffspring, string *XYcoordinates, int *CellCodes) // initialise the constants shared by all animal types
     {
 
