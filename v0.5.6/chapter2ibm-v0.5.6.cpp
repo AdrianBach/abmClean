@@ -405,11 +405,6 @@ class landscape
 {
     /* list of landscape-specific variables */
 
-public:                      // can be used / called in the main function
-    int **landscapeTablePtr; // pointer to the landscape table
-    string *XYcoordinates;   // landscape matching lists
-    int *cellCode;           //
-
 protected:                          // variables that should not be modified directly, nor accessed from the main function, but accessible to the other classes
     int landscapeMatchingListsSize; //
 
@@ -425,7 +420,11 @@ private:                     // variables that should not be modified directly, 
     fstream resultsTable;    // file to write results in
     fstream snapshotTable;   // file to save all relevant landscape cell info
 
-public:
+public:                      // can be used / called in the main function
+    int **landscapeTablePtr; // pointer to the landscape table
+    string *XYcoordinates;   // landscape matching lists
+    int *cellCode;           //
+    
     landscape(int size, vector<int> maxResourceVec) // constructor: function that creates objects of the class by assigning values to or initializing the variables
     {
         Size = size;
@@ -772,12 +771,6 @@ public:
 
 class animals
 {
-public:
-    /* population level variables */
-    int currentPopulationSize; // current population size of the animal
-    int initialDensity;
-    int **populationTablePtr; //
-
 protected:
     int landscapeSize;
     int maintenanceCost; // resources needed to survive a time step
@@ -819,6 +812,11 @@ private:
     int colIndex;   // population column index in landscapeTable
 
 public:
+    /* population level variables */
+    int currentPopulationSize; // current population size of the animal
+    int initialDensity;
+    int **populationTablePtr; //
+
     animals(int InitialDensity, int TypeTag, float MaxMove, int MaintenanceCost, int ReproductionCost, int LandscapeSize, float ExpectedOffspring, string *XYcoordinates, int *CellCodes) // initialise the constants shared by all animal types
     {
 
