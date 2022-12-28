@@ -1245,6 +1245,7 @@ private:
     vector<int> shuffledPop;
     int rowIndex;
     int indCellCode;
+    int indDoAstatus;           
     int dietSize;
     int resourceColIndex;
     int resourceAvailable;
