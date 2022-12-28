@@ -94,6 +94,7 @@ sim_name="test-probSurv" # argv[1]
 if [[ ( $freq_surv > 2 && $pry_intro_1 > 0 && $(($pry_intro_1%$freq_surv))==0 ) || ( $freq_surv > 2 && $pry_intro_2 > 0 && $(($pry_intro_2%$freq_surv))==0 ) ]]
 then
     # while true; do
+        echo "the remainder of prey_intro_1 ($prey_intro_2) % freq_surv ($freq_surv) is $(($pry_intro_2%$freq_surv))"
         read -p "WARNING: The time of introduction of preys (pry_intro_X) cannot be a multiple of the frequency of survival trials (freq_surv) when pry_intro_X > 0 and freq_surv > 2. Please choose a different value. I do not have any explanation for that yet, apologies."
         exit
 fi
