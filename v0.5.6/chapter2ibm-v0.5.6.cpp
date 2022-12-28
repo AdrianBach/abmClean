@@ -908,7 +908,7 @@ public:
         }
     }
 
-    void survivalTrial(string relationship, bool debug)
+    void survivalTrial(int relationship, bool debug)
     {
         if (debug == true)
             cout << memberTypes[membersMatchingListsIndex] << " survival trials" << endl
@@ -936,7 +936,7 @@ public:
             {
                 switch (relationship)
                 {
-                    case 'cond':
+                    case 1:	// conditional
                         /* if resonsume < maintenance cost -> change deadOrAlive to 0 else remove maintenance cost from the individual's resource pool */
                         if (populationTablePtr[ind][3] < maintenanceCost)
                         {
@@ -948,7 +948,7 @@ public:
                         }
                         break;
 
-                    case 'lin':
+                    case 2:	// linear
                         // calculate survival probability
                         if (populationTablePtr[ind][3] < maintenanceCost)
                         {
@@ -960,12 +960,12 @@ public:
                         }
                         break;
 
-                    case 'expNeg':
+                    case 3:	// exponential positive
                         // calculate survival probability
                         survivalProba = 1 - b * exp(-1 * a * float(populationTablePtr[ind][3]));    // careful float * int, should work like that
                         break;
 
-                    case 'expPos':
+                    case 4:	// exponential negative
                         // calculate survival probability
                         if (populationTablePtr[ind][3] < maintenanceCost)
                         {
@@ -1813,6 +1813,7 @@ public:
                 float catchProb = catchProbas[prey];
                 int densColumn = dietLandscapeIndexes[prey];
                 int catchColumn = densColumn + preyTypesNb;
+                /* NOT GOOD these variables should be declared outside the loop */ 
 
                 if (debug == true)
                 {
@@ -1831,7 +1832,7 @@ public:
 
                 /* compare to the catch probability, if < catch, if > fail */
                 if (randomNb < catchProb)
-                {
+                {                 
                     LandscapeTable[indCellCode][catchColumn] += 1;  // increment corresponding catch cell in landscape table
                     LandscapeTable[indCellCode][densColumn] -= 1;   // decrement density on the cell such that another predator cannot catch more individuals than there actually are on the cell
                     populationTablePtr[rowIndex][3] += convRate;    // increment predator resource pool
@@ -2230,14 +2231,14 @@ int main(int argc, char **argv)
                 for (int i = 0; i < preyTypesNb; i++)
                 {    
                     if (timeStep >= preyIntro[i])
-                        preys[i]->survivalTrial('lin', true);
+                        preys[i]->survivalTrial(2, true);
                 }
                 // prey1.getInfo();
                 // prey2.getInfo();
 
                 /* predators */
                 if (timeStep >= predIntro[0])
-                    pred1->survivalTrial('lin', true);
+                    pred1->survivalTrial(2, true);
 
                 // for (int i = 0; i < predatorTypesNb; i++)
                 // {
