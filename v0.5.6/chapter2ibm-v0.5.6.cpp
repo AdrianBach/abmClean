@@ -425,6 +425,7 @@ private:                     // variables that should not be modified directly, 
     fstream resultsTable;    // file to write results in
     fstream snapshotTable;   // file to save all relevant landscape cell info
 
+public:
     landscape(int size, vector<int> maxResourceVec) // constructor: function that creates objects of the class by assigning values to or initializing the variables
     {
         Size = size;
