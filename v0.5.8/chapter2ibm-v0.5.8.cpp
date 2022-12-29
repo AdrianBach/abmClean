@@ -781,16 +781,17 @@ private:
     float expectedOffspring; // max number of offspring when passing reproduction trial
 
     /* variables for survival trial function */
-    float survivalProba;    // declare a survival probability variable
-    float randomNb;         // declare a random number variable
-    float p0 = 0.1;         // survival probability when resource stock = 0. NOT GOOD hard coded
-    float pmC = 0.9;        // survival probability when resource stock = maintenance cost. NOT GOOD hard coded
-    float a;                // declare exponential negative proba function coefficient a
-    float b;                // declare exponential negative proba function coeff b
-    float c;                // declare linear probq function coefficient c
-    float d;                // declare exponential positive proba function coefficient d 
-    float e;                // declare logistic proba function coefficient e
-    float f;                // declare logistic proba function coefficient f 
+    float survivalProba;        // declare a survival probability variable
+    float reproductionProba;    // declare a survival probability variable
+    float randomNb;             // declare a random number variable
+    float p0 = 0.1;             // survival probability when resource stock = 0. NOT GOOD hard coded
+    float pmC = 0.9;            // survival probability when resource stock = maintenance cost. NOT GOOD hard coded
+    float a;                    // declare exponential negative proba function coefficient a
+    float b;                    // declare exponential negative proba function coeff b
+    float c;                    // declare linear probq function coefficient c
+    float d;                    // declare exponential positive proba function coefficient d 
+    float e;                    // declare logistic proba function coefficient e
+    float f;                    // declare logistic proba function coefficient f 
 
     // /* variables for update table function */
     // int oldPopulationSize;      // variable to store current population size for function purpose                                                        // store previous population size
@@ -1052,34 +1053,132 @@ public:
         
     } // end function
 
-    void reproductionTrial()
+    void reproductionTrial(int relationship, bool debug)
     {
-        /* debug
-        cout << memberTypes[membersMatchingListsIndex] << " reproduction trials" << endl
-             << endl;
-        */
+        if (debug == true)
+            cout << memberTypes[membersMatchingListsIndex] << " reproduction trials" << endl
+                << endl;                                                  
+
+        /* compute coefficients */
+        b = 1 - p0;
+        a = - log((1-pmC) / b) / float(reproductionCost);
+        c = (pmC - p0) / float(reproductionCost);
+        d = log(pmC / p0) / reproductionCost;
+        e = (log(1/p0 - 1) - log(1/pmC - 1))/float(reproductionCost);
+        f = 1/e * log(1/p0 - 1); 
+        
+        int ind = 0;    // initiate individuals counter
+        int zz = 0;     // initiate births counter
 
         /* iterate through individuals */
-        int ind = 0;
-
         while (ind < currentPopulationSize)
         {
-            if (populationTablePtr[ind][4] == 1 && populationTablePtr[ind][3] >= reproductionCost) // if individual is alive and has enough resources to reproduce
+            if (populationTablePtr[ind][4] == 1) // if individual is alive
             {
-                populationTablePtr[ind][5] = randomSampleFromPoissonDist(expectedOffspring); // even if it has the resource it might not reproduce (and thus not paying the cost)
+                switch (relationship)
+                {
+                    case 1:	// conditional
+                    
+                    default : // conditional
+                        /* if resonsume < reproduction cost -> change deadOrAlive to 0 else remove reproduction cost from the individual's resource pool */
+                        if (populationTablePtr[ind][3] < reproductionCost)
+                        {
+                                reproductionProba = 0;
+                        }
+                        else
+                        {
+                                reproductionProba = 1; 
+                        }
+                        break;
 
-                /* debug 
-                cout << "animal of type " << typeTag << " #" << ind << "has enough resources to reproduce. Offspring nb: " << populationTablePtr[ind][5] << endl
-                     << endl;
-                */
+                    case 2:	// linear
+                        // calculate reproduction probability
+                        if (populationTablePtr[ind][3] < reproductionCost)
+                        {
+                            // c = (pmC - p0) / float(reproductionCost);
+                            reproductionProba = c * float(populationTablePtr[ind][3]) + p0;    // careful float * int, should work like that. 
+                        } 
+                        else
+                        {
+                            reproductionProba = 1 - b * exp(-1 * a * float(populationTablePtr[ind][3]));    
+                        }
+                        break;
 
-                if (populationTablePtr[ind][5] > 0)
-                    populationTablePtr[ind][3] -= reproductionCost; // if at least one offspring subtract reproduction cost from resource pool
-            }
+                    case 3:	// exponential negative
+                    // calculate reproduction probability
+                        reproductionProba = 1 - b * exp(-1 * a * float(populationTablePtr[ind][3]));    
+                        break;
+
+                    case 4:	// exponential positive
+                        // calculate reproduction probability
+                        if (populationTablePtr[ind][3] < reproductionCost)
+                        {
+                            // d = log(pmC / p0) / reproductionCost;
+                            reproductionProba = p0 * exp(d * float(populationTablePtr[ind][3]));    
+                        }   
+                        else
+                        {
+                            reproductionProba = 1 - b * exp(-1 * a * float(populationTablePtr[ind][3]));    
+                        }
+                        break;
+                        
+                    case 5:	// logistic
+                        // calculate reproduction probability
+                        // e = (log(1/p0 - 1) - log(1/pmC - 1))/float(reproductionCost);
+                        // f = 1/e * log(1/p0 - 1);                                     
+                        reproductionProba = 1 / (1 + exp(-1 * e * (float(populationTablePtr[ind][3]) - f)));
+                        
+                        break;
+
+                } // end of switch(relationship)
+
+                randomNb = randomNumberGenerator0to1(0, 1); // generate a random number between 0 and 1
+
+                if (debug == true)
+                    cout << "animal number " << ind << "; resource stock " << populationTablePtr[ind][3] << endl 
+                        << "reproduction proba is " << reproductionProba << " and trial is " << randomNb << endl;
+
+                if (randomNb > reproductionProba)
+                {
+                    populationTablePtr[ind][5] = 0;     // update offspring nb info to be sure
+
+                    if (debug == true)
+                    cout << "did not reproduce.." << endl << endl; 
+                }
+                else
+                {
+                    // generate a random number of offspring
+                    populationTablePtr[ind][5] = randomSampleFromPoissonDist(expectedOffspring); // even if it has the resource it might not reproduce (and thus not paying the cost)
+
+                    if (populationTablePtr[ind][5] > 0) // if at least 1 offspring, pay the resource cost
+                    {
+                        if (populationTablePtr[ind][3] >= reproductionCost)
+                        {
+                            populationTablePtr[ind][3] -= reproductionCost; // substract the reproduction cost to the resource stock
+                        }
+                        else
+                        {
+                            populationTablePtr[ind][3] -= populationTablePtr[ind][3]; // substract what was left in the resource stock
+                        }
+
+                        zz += 1;    // update birth count
+                    }
+
+                    if (debug == true)
+                        cout << "had " << populationTablePtr[ind][5] << " offspring. Resource pool is now " << populationTablePtr[ind][3] << endl << endl; 
+                
+                } // end if else condition on randomNb
+            
+            } // end if alive
 
             ind++; // next individual
-        }
-    }
+            
+        } // end while loop on individuals
+
+        if (debug == true)
+            cout << zz << " " << memberTypes[membersMatchingListsIndex] << " reproduced" << endl << endl;
+        
+    } // end function
 
     void updatePopulationTable(int timeStep, bool debug) // updates current pop size, creates a new table with updated information, replaces popTable with the updated version, reset offspring to 0, deletes the older version
     {
