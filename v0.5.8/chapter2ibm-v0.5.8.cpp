@@ -2353,14 +2353,14 @@ int main(int argc, char **argv)
                 for (int i = 0; i < preyTypesNb; i++)
                 {    
                     if (timeStep >= preyIntro[i])
-                        preys[i]->survivalTrial(5, true);
+                        preys[i]->survivalTrial(5, false);
                 }
                 // prey1.getInfo();
                 // prey2.getInfo();
 
                 /* predators */
                 if (timeStep >= predIntro[0])
-                    pred1->survivalTrial(5, true);
+                    pred1->survivalTrial(5, false);
 
                 // for (int i = 0; i < predatorTypesNb; i++)
                 // {
@@ -2377,7 +2377,7 @@ int main(int argc, char **argv)
                 for (int i = 0; i < preyTypesNb; i++)
                 {    
                     if (timeStep >= preyIntro[i])
-                        preys[i]->reproductionTrial();
+                        preys[i]->reproductionTrial(1, true);
                 }
 
                 // prey1.getInfo();
@@ -2385,7 +2385,7 @@ int main(int argc, char **argv)
 
                 /* predators */
                 if (timeStep >= predIntro[0])
-                    pred1->reproductionTrial();
+                    pred1->reproductionTrial(1, true);
 
                 // for (int i = 0; i < predatorTypesNb; i++)
                 // {
