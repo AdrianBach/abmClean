@@ -1,6 +1,6 @@
 sim_name = test-probSurv 	 # argv[1] 
 
-model version v0.5.8 
+model version v0.5.9 
 
 # landscape variables
 size = 5 	 # argv[2] world's side size
@@ -59,4 +59,4 @@ rep = 1
 
 rep 	 seed (arg[41]) 	 sim time (s) 	 sim time (h) 
 
-0 	 31068 			 0 		 0 
+0 	 25183 			 0 		 0 

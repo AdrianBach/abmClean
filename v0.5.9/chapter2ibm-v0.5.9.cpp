@@ -1976,7 +1976,7 @@ public:
                         if (debug == true)
                         {
                                 cout << "predator number " << rowIndex << " caught a prey " << prey << " worth " << cons << endl
-                                    << "its resource pool now got " << predCons << " in it" << endl;
+                                     << "its resource pool now got " << predCons << " in it" << endl << endl;
                         }
                     
                     }
@@ -2337,7 +2337,7 @@ int main(int argc, char **argv)
 
             /* predators */
             if (timeStep >= predIntro[0])
-                pred1->huntNew(world.landscapeTablePtr, false);
+                pred1->huntNew(world.landscapeTablePtr, true);
 
             // for (int i = 0; i < predatorTypesNb; i++)
             // {
@@ -2365,14 +2365,14 @@ int main(int argc, char **argv)
                 for (int i = 0; i < preyTypesNb; i++)
                 {    
                     if (timeStep >= preyIntro[i])
-                        preys[i]->survivalTrial(5, false);
+                        preys[i]->survivalTrial(1, false);
                 }
                 // prey1.getInfo();
                 // prey2.getInfo();
 
                 /* predators */
                 if (timeStep >= predIntro[0])
-                    pred1->survivalTrial(5, false);
+                    pred1->survivalTrial(1, false);
 
                 // for (int i = 0; i < predatorTypesNb; i++)
                 // {
