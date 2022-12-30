@@ -2004,19 +2004,21 @@ public:
                             if (debug == true)
                                 cout << "predator catch attempt failed" << endl
                                         << endl;
-                        } // end of if else proba trial 
-
-                        /* debug */
-                        if (debug == true)
-                        {
-                            if (i >= availablePreys.size())
-                                cout << "Parsed every prey situated column " << densColumn << " in landscape table on cell " << indCellCode << ". Next individual" << endl
-                                    << endl;
-                        }
+                        } // end of if else proba trial
                         
                         i++; // increment prey index
 
-                    } // end of while loop over preys and over conditions for hunting
+                    } // end of while loop over preys and over conditions for hunting 
+
+                    /* debug */
+                    if (debug == true)
+                    {
+                        if (dailyCons >= dailyPredMaxConsumption)
+                            cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has reached satiation. Next individual" << endl << endl;
+                        
+                        if (i >= availablePreys.size())
+                            cout << "Parsed every prey situated column " << densColumn << " in landscape table on cell " << indCellCode << ". Next individual" << endl << endl;
+                    }
 
                 } // end if else pred satiated
 
