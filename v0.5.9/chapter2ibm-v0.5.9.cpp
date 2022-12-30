@@ -1841,7 +1841,7 @@ public:
                     /* debug */
                     if (debug == true)
                     {
-                        if (dailyCons >= dailyPredMaxConsumption)
+                        // if (dailyCons >= dailyPredMaxConsumption)
                             cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has reached satiation. Next individual" << endl
                                     << endl;
                         // if (predCons >= predMaxConsumption)
@@ -2409,7 +2409,7 @@ int main(int argc, char **argv)
                 for (int i = 0; i < preyTypesNb; i++)
                 {    
                     if (timeStep >= preyIntro[i])
-                        preys[i]->reproductionTrial(1, true);
+                        preys[i]->reproductionTrial(1, false);
                 }
 
                 // prey1.getInfo();
@@ -2417,7 +2417,7 @@ int main(int argc, char **argv)
 
                 /* predators */
                 if (timeStep >= predIntro[0])
-                    pred1->reproductionTrial(1, true);
+                    pred1->reproductionTrial(1, false);
 
                 // for (int i = 0; i < predatorTypesNb; i++)
                 // {
