@@ -1993,6 +1993,14 @@ public:
                             cout << "predator catch attempt failed" << endl
                                     << endl;
                     } // end of if else proba trial 
+
+                    /* debug */
+                    if (debug == true)
+                    {
+                        if (i >= availablePreys.size())
+                            cout << "No more prey situated column " << densColumn << " in landscape table on cell " << indCellCode << "." << endl
+                                 << endl;
+                    }
                     
                     i++; // increment prey index
 
@@ -2001,9 +2009,6 @@ public:
                 /* debug */
                 if (debug == true)
                 {
-                    if (i >= availablePreys.size())
-                        cout << "No more prey situated column " << densColumn << " in landscape table on cell " << indCellCode << "." << endl
-                                << endl;
                     if (dailyCons >= dailyPredMaxConsumption)
                         cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has eaten enough for this time step." << endl
                                 << endl;
