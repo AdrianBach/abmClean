@@ -1841,12 +1841,7 @@ public:
                     /* debug */
                     if (debug == true)
                     {
-                        // if (dailyCons >= dailyPredMaxConsumption)
-                            cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has reached satiation. Next individual" << endl
-                                    << endl;
-                        // if (predCons >= predMaxConsumption)
-                        //     cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl
-                        //             << endl;
+                        cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has reached satiation. Next individual" << endl << endl;
                     }
                 }   
                 else
