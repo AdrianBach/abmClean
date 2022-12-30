@@ -1841,7 +1841,7 @@ public:
                     /* debug */
                     if (debug == true)
                     {
-                        cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has reached satiation. Next individual" << endl << endl;
+                        cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " is already satiated. Next individual" << endl << endl;
                     }
                 }   
                 else
@@ -1946,7 +1946,7 @@ public:
                     int dailyCons = 0;                              // initiate a tracker for pred consumption (in resources)
                     // int predCons = populationTablePtr[rowIndex][3]; // get predator resource pool
 
-                    while (i < availablePreys.size())
+                    while (i < availablePreys.size() && dailyCons < dailyPredMaxConsumption)
                     {
                         /* get preys info */
                         int prey = availablePreys[i];
