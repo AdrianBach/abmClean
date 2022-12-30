@@ -1760,7 +1760,7 @@ public:
 
     } // end of hunt function
 
-    void huntNew(int **LandscapeTable, bool debug)
+    void huntNew(int **LandscapeTable, bool random, bool debug)
     {
 
         /* debug
@@ -1928,7 +1928,7 @@ public:
                 }
 
                 /* iterate through prey columns and while catches < maxCatches and
-                that there are prey available, catch them */
+                   that there are prey available, catch them */
 
                 int i = 0;                                      // initiate index for conversion rate
                 int dailyCons = 0;                              // initiate a tracker for pred consumption (in resources)
@@ -1963,7 +1963,14 @@ public:
                     /* compare to the catch probability, if < catch, if > fail */
                     if (randomNb < catchProb)
                     {
-                        cons = randomNumberGeneratorAny(0, convRate);   // generate a random number between 0 and maxConsume
+                        if (random == true)
+                        {
+                            cons = randomNumberGeneratorAny(0, convRate);   // generate a random number between 0 and maxConsume
+                        } 
+                        else
+                        {
+                            cons = convRate;
+                        }
 
                         LandscapeTable[indCellCode][catchColumn] += 1;  // increment corresponding catch cell in landscape table
                         LandscapeTable[indCellCode][densColumn] -= 1;   // decrement density on the cell such that another predator cannot catch more individuals than there actually are on the cell
@@ -1985,25 +1992,25 @@ public:
                         if (debug == true)
                             cout << "predator catch attempt failed" << endl
                                     << endl;
-                    } // end of if loop 
-
-                    /* debug */
-                    if (debug == true)
-                    {
-                        if (i >= availablePreys.size())
-                            cout << "No more prey situated column " << densColumn << " in landscape table on cell " << indCellCode << "." << endl
-                                    << endl;
-                        if (dailyCons >= dailyPredMaxConsumption)
-                            cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has eaten enough for this time step." << endl
-                                    << endl;
-                        if (predCons >= predMaxConsumption)
-                            cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl
-                                    << endl;
-                    }
+                    } // end of if else proba trial 
                     
                     i++; // increment prey index
 
                 } // end of while loop over preys and over conditions for hunting
+
+                /* debug */
+                if (debug == true)
+                {
+                    if (i >= availablePreys.size())
+                        cout << "No more prey situated column " << densColumn << " in landscape table on cell " << indCellCode << "." << endl
+                                << endl;
+                    if (dailyCons >= dailyPredMaxConsumption)
+                        cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has eaten enough for this time step." << endl
+                                << endl;
+                    if (predCons >= predMaxConsumption)
+                        cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl
+                                << endl;
+                }
 
             } // end else if preys present on cell
 
@@ -2337,7 +2344,7 @@ int main(int argc, char **argv)
 
             /* predators */
             if (timeStep >= predIntro[0])
-                pred1->huntNew(world.landscapeTablePtr, true);
+                pred1->huntNew(world.landscapeTablePtr, false, true);
 
             // for (int i = 0; i < predatorTypesNb; i++)
             // {
