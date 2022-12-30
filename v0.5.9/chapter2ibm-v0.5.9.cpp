@@ -1836,12 +1836,12 @@ public:
             {
                 int predCons = populationTablePtr[rowIndex][3]; // get predator resource pool
 
-                if (predCons >= dailyPredMaxConsumption)
+                if (predCons >= predMaxConsumption)
                 {
                     /* debug */
                     if (debug == true)
                     {
-                        cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " is already satiated. Next individual" << endl << endl;
+                        cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl << endl;                    
                     }
                 }   
                 else
