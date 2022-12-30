@@ -1190,16 +1190,16 @@ public:
 
         currentPopulationSize += newInds - deadInds; // update current population size/* debug */
 
-        /* make warnings if low pop */
-        if (initialDensity != 0)
-        {
-            if (currentPopulationSize == 0)
-                cout << "time step #" << timeStep << ": " << memberTypes[membersMatchingListsIndex] << "'s population has gone extinct" << endl
-                     << endl;
-            else if (float(currentPopulationSize) <= 0.1 * float(initialDensity))
-                cout << "time step #" << timeStep << ": " << memberTypes[membersMatchingListsIndex] << "'s population is under 10 percent of its initial size" << endl
-                     << endl;
-        }
+        // /* make warnings if low pop */
+        // if (initialDensity != 0)
+        // {
+        //     if (currentPopulationSize == 0)
+        //         cout << "time step #" << timeStep << ": " << memberTypes[membersMatchingListsIndex] << "'s population has gone extinct" << endl
+        //              << endl;
+        //     else if (float(currentPopulationSize) <= 0.1 * float(initialDensity))
+        //         cout << "time step #" << timeStep << ": " << memberTypes[membersMatchingListsIndex] << "'s population is under 10 percent of its initial size" << endl
+        //              << endl;
+        // }
 
         if (debug == true)
         {
