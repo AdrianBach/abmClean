@@ -2017,7 +2017,7 @@ public:
                             cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has reached satiation. Next individual" << endl << endl;
                         
                         if (i >= availablePreys.size())
-                            cout << "Parsed every prey situated column " << densColumn << " in landscape table on cell " << indCellCode << ". Next individual" << endl << endl;
+                            cout << "Parsed every prey in the vector. Next individual" << endl << endl;
                     }
 
                 } // end if else pred satiated
