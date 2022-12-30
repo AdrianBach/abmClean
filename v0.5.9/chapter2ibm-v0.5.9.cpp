@@ -1841,7 +1841,7 @@ public:
                     /* debug */
                     if (debug == true)
                     {
-                        cout << memberTypes[membersMatchingListsIndex] << "situated on cell " << indCellCode << " has eaten enough for this moving+feeding sequence." << endl << endl;                    
+                        cout << memberTypes[membersMatchingListsIndex] << " number " << rowIndex << " has eaten enough for this moving+feeding sequence." << endl << endl;                    
                     }
                 }   
                 else
@@ -2014,7 +2014,7 @@ public:
                     if (debug == true)
                     {
                         if (dailyCons >= dailyPredMaxConsumption)
-                            cout << memberTypes[membersMatchingListsIndex] << " situated on cell " << indCellCode << " has reached satiation. Next individual" << endl << endl;
+                            cout << memberTypes[membersMatchingListsIndex] << " number " << rowIndex << " has reached satiation. Next individual" << endl << endl;
                         
                         if (i >= availablePreys.size())
                             cout << "Parsed every prey in the vector. Next individual" << endl << endl;

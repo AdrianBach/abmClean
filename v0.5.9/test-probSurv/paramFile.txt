@@ -59,4 +59,4 @@ rep = 1
 
 rep 	 seed (arg[41]) 	 sim time (s) 	 sim time (h) 
 
-0 	 25183 			 0 		 0 
+0 	 18622 			 0 		 0 
