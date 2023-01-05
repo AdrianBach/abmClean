@@ -2239,9 +2239,9 @@ int main(int argc, char **argv)
     /* contruct and create landscape */
     landscape world(worldSize, maxResources); // NOT GOOD add a variable for different max for each resource
 
-    /* check if everything is where expected: OK
+    /* check if everything is where expected: OK */
     world.getInfo();
-    */
+   
 
     /* ---- construct animals populations ---- */
 
