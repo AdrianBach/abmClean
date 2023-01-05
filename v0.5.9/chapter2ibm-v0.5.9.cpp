@@ -576,7 +576,7 @@ public:                      // can be used / called in the main function
         {
             /* refill resources */
             for (int res = 0; res < resourceTypesNb; res++)
-                landscapeTablePtr[r][resColumnStart + res] = MaxResource[0];
+                landscapeTablePtr[r][resColumnStart + res] = MaxResource[res];
 
             r++;
         }
@@ -2230,7 +2230,7 @@ int main(int argc, char **argv)
 
     assignTagsIndexes(); // creates individuals' matching tables. NEED 3 delete[] : OK
 
-    makeDietsTable(true); // NEED 1 delete[] : OK
+    makeDietsTable(false); // NEED 1 delete[] : OK
 
     srand(randomSeed); // set random generator seed with instant time
 
@@ -2286,10 +2286,10 @@ int main(int argc, char **argv)
 
     while (timeStep <= timeMaxi)
     {
-        /* debug 
+        /* debug */
         cout << "time step " << timeStep << endl
              << endl;
-        */
+        
 
         if (timeStep > 0)
         {
@@ -2491,7 +2491,12 @@ int main(int argc, char **argv)
         world.resetCounts();
 
         if (timeStep % freqRfll == 0)
+        {
             world.resetResources();
+
+            /* check if everything is where expected: OK */
+            world.getInfo();
+        }
 
         timeStep++;
     }
