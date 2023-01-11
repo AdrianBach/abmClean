@@ -1,4 +1,4 @@
-sim_name = folder-introScenario 	 # argv[1] 
+sim_name = test-introScenario 	 # argv[1] 
 
 model version v0.5.9 
 
@@ -52,39 +52,10 @@ freq_rslt = 10 	 # argv[39] frequency of landscape snap shot
 freq_snap = 1001 	 # argv[40] frequency of results measure
 
 # number of replicates
-rep = 30
+rep = 1
 
 # Simulation infos 
 
 rep 	 seed (arg[41]) 	 sim time (s) 	 sim time (h) 
 
-0 	 32523 			 5 		 0 
-1 	 14617 			 5 		 0 
-2 	 8903 			 4 		 0 
-3 	 32271 			 5 		 0 
-4 	 18809 			 4 		 0 
-5 	 31673 			 5 		 0 
-6 	 30255 			 6 		 0 
-7 	 4204 			 4 		 0 
-8 	 27489 			 5 		 0 
-9 	 19034 			 4 		 0 
-10 	 32107 			 5 		 0 
-11 	 31724 			 5 		 0 
-12 	 9671 			 5 		 0 
-13 	 9584 			 4 		 0 
-14 	 11831 			 5 		 0 
-15 	 9092 			 4 		 0 
-16 	 31944 			 5 		 0 
-17 	 3718 			 4 		 0 
-18 	 21894 			 5 		 0 
-19 	 20380 			 5 		 0 
-20 	 26850 			 4 		 0 
-21 	 21174 			 5 		 0 
-22 	 7392 			 4 		 0 
-23 	 23021 			 5 		 0 
-24 	 30898 			 4 		 0 
-25 	 1042 			 5 		 0 
-26 	 19630 			 4 		 0 
-27 	 26165 			 5 		 0 
-28 	 2619 			 4 		 0 
-29 	 29582 			 5 		 0 
+0 	 614 			 4 		 0 

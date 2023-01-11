@@ -37,7 +37,7 @@ pry_cons_2=10	# argv[12] prey 2 max consumption in resource units
 # pry_surv_1=3  # argv[13] prey 1 resource units needed to pass survival trial
 # pry_surv_2=3  # argv[14] prey 2 resource units needed to pass survival trial
 pry_offs_1=1    # argv[15] prey 1 max number of offspring
-pry_offs_2=2   # argv[16] prey 2 max number of offspring
+pry_offs_2=1   # argv[16] prey 2 max number of offspring
 # pry_repr_1=5  # argv[17] prey 1 resource units needed to pass reproduction trial
 # pry_repr_2=5  # argv[18] prey 2 resource units needed to pass reproduction trial
 pry_intro_1=0   # argv[19]
@@ -68,7 +68,7 @@ freq_rslt=10    # argv[39] frequency of landscape results shot
 freq_snap=1001  # argv[40] frequency of snap measure
 
 # number of replicates
-rep=10
+rep=30
 
 ## Non user defined variables ##
 
@@ -91,7 +91,7 @@ prd_repr_1=$(($prd_surv_1/1)); # echo "prd_repr_1 = $prd_repr_1" # argv[27] pred
 # prd_cvrt_pry2_1=$(($ratio*$prd_cvrt_pry1_1))  # argv[32] predator 1 prey1 resources/catch
 
 # name the simulation with only the variables of interest and their value
-sim_name="test-introScenario-avgOff2" # argv[1]
+sim_name="folder-introScenario" # argv[1]
 
 ## Warning about timing of introduction ##
 # if [[ $varA == 1 && ($varB == "t1" || $varC == "t2") ]]; then
