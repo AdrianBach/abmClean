@@ -22,7 +22,7 @@
 size=25       # argv[2] world's side size
 res_nb=2     # argv[3] number of resource types
 max_res_1=100 # argv[4] max resource 1 per cell
-max_res_2=200 # argv[5] max resource 2 per cell
+max_res_2=100 # argv[5] max resource 2 per cell
 
 # max_cell=5 # max expected number of preys of each kind per cell # if 2.5, between 2 and 3 animals per cell
 
