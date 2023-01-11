@@ -1393,7 +1393,7 @@ public:
             {
                 cellNb = populationTablePtr[rowIndex][2];   // get animal's cell code
 
-                populationTablePtr[rowIndex][4] == 0;   // change DoA status to dead
+                populationTablePtr[rowIndex][4] = 0;   // change DoA status to dead
                 // LandscapeTable[cellNb][colIndex] -= 1;  // decrease density on cell
                 cullCounter++;
 
@@ -2393,10 +2393,10 @@ int main(int argc, char **argv)
 
     while (timeStep <= timeMaxi)
     {
-        /* debug */
+        /* debug 
         cout << "time step " << timeStep << endl
              << endl;
-        
+        */
 
         if (timeStep > 0)
         {
@@ -2485,9 +2485,9 @@ int main(int argc, char **argv)
 
             if (timeStep > timeImpl && timeStep % freqCull == 0)
             {
-                prey2->getInfo();
-                prey2->cull(cullQuot, world.landscapeTablePtr, true);
-                prey2->getInfo();
+                // prey2->getInfo();
+                prey2->cull(cullQuot, world.landscapeTablePtr, false);
+                // prey2->getInfo();
             } 
 
             /* -- surviving -- */
