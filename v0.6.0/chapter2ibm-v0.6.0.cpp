@@ -1187,6 +1187,11 @@ public:
                 } // end if else condition on randomNb
             
             } // end if alive
+            else
+            {
+                if (debug == true)
+                    cout << "animal number " << ind << "is dead :(. Next individual." << endl << endl;
+            }
 
             ind++; // next individual
             
@@ -1388,13 +1393,13 @@ public:
             {
                 cellNb = populationTablePtr[rowIndex][2];   // get animal's cell code
 
-                populationTablePtr[rowIndex][4] == 0;   // change DoA status
-                LandscapeTable[cellNb][colIndex] -= 1;  // decrease density on cell
+                populationTablePtr[rowIndex][4] == 0;   // change DoA status to dead
+                // LandscapeTable[cellNb][colIndex] -= 1;  // decrease density on cell
                 cullCounter++;
 
                 if (debug == true)
                 cout << "Oh no! They got " << memberTypes[membersMatchingListsIndex] << " number " << rowIndex << "! *trumpets sound*" << endl
-                     << "density on cell " << cellNb << " is now " << LandscapeTable[cellNb][colIndex] << endl
+                    //  << "density on cell " << cellNb << " is now " << LandscapeTable[cellNb][colIndex] << endl
                      << endl;
             }
 
