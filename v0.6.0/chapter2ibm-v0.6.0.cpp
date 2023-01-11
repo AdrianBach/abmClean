@@ -2479,13 +2479,15 @@ int main(int argc, char **argv)
             }
 
             // prey1.getInfo();
-            // prey2.getInfo();
+            // prey2->getInfo();
 
             /* -- management -- */
 
             if (timeStep > timeImpl && timeStep % freqCull == 0)
             {
+                prey2->getInfo();
                 prey2->cull(cullQuot, world.landscapeTablePtr, true);
+                prey2->getInfo();
             } 
 
             /* -- surviving -- */
