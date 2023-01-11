@@ -41,7 +41,7 @@ pry_offs_2=1    # argv[16] prey 2 max number of offspring
 # pry_repr_1=5  # argv[17] prey 1 resource units needed to pass reproduction trial
 # pry_repr_2=5  # argv[18] prey 2 resource units needed to pass reproduction trial
 pry_intro_1=0   # argv[19]
-pry_intro_2=0   # argv[20]
+pry_intro_2=11   # argv[20]
 
 # predator variables
 prd_nb=1        # argv[21] number of predator types
@@ -49,7 +49,7 @@ prd_init_1=100    # argv[22] predator 1 initial density in nb of individuals
 prd_move_1=0.1  # argv[23] predator 1 max movement range in fraction of size
 prd_surv_1=300	# arg[25]
 prd_offs_1=0.5    # argv[26] predator 1 max number of offspring
-prd_intr_1=201    # argv[28] predator 1 time of introduction in the model
+prd_intr_1=6    # argv[28] predator 1 time of introduction in the model
 prd_ctch_pry1_1=0.1  # argv[29] predator 1 prey1 catch probability
 prd_ctch_pry2_1=0.1  # argv[30] predator 1 prey2 catch probability
 prd_oprt_1=0    # argv[33] is predator oportunistic? (0 or 1)
@@ -94,14 +94,15 @@ prd_repr_1=$(($prd_surv_1/1)); # echo "prd_repr_1 = $prd_repr_1" # argv[27] pred
 sim_name="test-res2" # argv[1]
 
 ## Warning about timing of introduction ##
-#if [[ ( $P = "SFTP" && $PORT != "22" ) || ( $P = "FTPS" && $PORT != "990" && $PORT != "21" ) ]] ; then
-if [[ ( $freq_surv > 2 && $pry_intro_1 > 0 && $(($pry_intro_1%$freq_surv))==0 ) || ( $freq_surv > 2 && $pry_intro_2 > 0 && $(($pry_intro_2%$freq_surv))==0 ) ]]
-then
-    # while true; do
-        echo "the remainder of prey_intro_1 ($prey_intro_2) % freq_surv ($freq_surv) is $(($pry_intro_2%$freq_surv))"
-        read -p "WARNING: The time of introduction of preys (pry_intro_X) cannot be a multiple of the frequency of survival trials (freq_surv) when pry_intro_X > 0 and freq_surv > 2. Please choose a different value. I do not have any explanation for that yet, apologies."
-        exit
-fi
+# if [[ $varA == 1 && ($varB == "t1" || $varC == "t2") ]]; then
+# if [[ ( $P = "SFTP" && $PORT != "22" ) || ( $P = "FTPS" && $PORT != "990" && $PORT != "21" ) ]] ; then
+# if [[  $freq_surv > 2 && (($pry_intro_1 > 0 && $(($pry_intro_1%$freq_surv))=0) || ($pry_intro_2 > 0 && $(($pry_intro_2%$freq_surv))=0)) ]]
+# then
+#     # while true; do
+#         echo "the remainder of prey_intro_1 ($pry_intro_1) % freq_surv ($freq_surv) is $(($pry_intro_1%$freq_surv)). \n the remainder of prey_intro_2 ($pry_intro_2) % freq_surv ($freq_surv) is $(($pry_intro_2%$freq_surv))."
+#         read -p "WARNING: The time of introduction of preys (pry_intro_X) cannot be a multiple of the frequency of survival trials (freq_surv) when pry_intro_X > 0 and freq_surv > 2. Please choose a different value. I do not have any explanation for that yet, apologies. Press enter to quit."
+#         exit
+# fi
 
 #### Simulation loop ####
 
