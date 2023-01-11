@@ -64,6 +64,7 @@ unsigned int randomSeed;
 
 /* management variables */
 int freqCull;   // frequency of culling
+int timeImpl;   // start of culling policy
 float cullQuot; // culling quota (if < 1, percentage of population, if > 1 in number of individuals) 
 
 /* structures for the ibm */
@@ -2314,6 +2315,10 @@ int main(int argc, char **argv)
 
     p++;
 
+    timeImpl = atoi(argv[p]);
+
+    p++;
+
     freqCull = atoi(argv[p]);
 
     p++;
@@ -2473,7 +2478,7 @@ int main(int argc, char **argv)
 
             /* -- management -- */
 
-            if (timeStep % freqCull == 0)
+            if (timeStep > timeImpl && timeStep % freqCull == 0)
             {
                 prey2->cull(cullQuot, world.landscapeTablePtr, true);
             } 

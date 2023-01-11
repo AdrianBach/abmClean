@@ -68,7 +68,8 @@ freq_rslt=10    # argv[39] frequency of landscape results shot
 freq_snap=1001  # argv[40] frequency of snap measure
 
 # management variables
-pry_cull_quot_2=50 # argv[41] prey 2 culling quota
+pry_cull_quot_2=100 # argv[41] prey 2 culling quota
+pry_cull_impl_2=300 # argv[42] prey 2 time of culling implementation
 pry_freq_cull_2=5 # argv[42] prey 2 culling intervention frequency
 
 # number of replicates
@@ -254,7 +255,7 @@ do
     # echo "rand seed: $rand_seed" 
 
     start=$(date +%s)
-    ./test-chapter2ibm.o $sim_name $size $res_nb $max_res_1 $max_res_2 $pry_nb $pry_init_1 $pry_init_2 $pry_move_1 $pry_move_2 $pry_cons_1 $pry_cons_2 $pry_surv_1 $pry_surv_2 $pry_offs_1 $pry_offs_2 $pry_repr_1 $pry_repr_2 $pry_intro_1 $pry_intro_2 $prd_nb $prd_init_1 $prd_move_1 $prd_cons_1 $prd_surv_1 $prd_offs_1 $prd_repr_1 $prd_intr_1 $prd_ctch_pry1_1 $prd_ctch_pry2_1 $prd_cvrt_pry1_1 $prd_cvrt_pry2_1 $prd_oprt_1 $prd_spcf_1 $simu_time $freq_repr $freq_surv $freq_rfll $freq_rslt $freq_snap  $pry_cull_quot_2 $pry_freq_cull_2 $rand_seed
+    ./test-chapter2ibm.o $sim_name $size $res_nb $max_res_1 $max_res_2 $pry_nb $pry_init_1 $pry_init_2 $pry_move_1 $pry_move_2 $pry_cons_1 $pry_cons_2 $pry_surv_1 $pry_surv_2 $pry_offs_1 $pry_offs_2 $pry_repr_1 $pry_repr_2 $pry_intro_1 $pry_intro_2 $prd_nb $prd_init_1 $prd_move_1 $prd_cons_1 $prd_surv_1 $prd_offs_1 $prd_repr_1 $prd_intr_1 $prd_ctch_pry1_1 $prd_ctch_pry2_1 $prd_cvrt_pry1_1 $prd_cvrt_pry2_1 $prd_oprt_1 $prd_spcf_1 $simu_time $freq_repr $freq_surv $freq_rfll $freq_rslt $freq_snap $pry_cull_quot_2 $pry_cull_impl_2 $pry_freq_cull_2 $rand_seed
     end=$(date +%s)
 
     time_s=$(($end-$start))
