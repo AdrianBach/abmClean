@@ -5,7 +5,7 @@
 #include <stdlib.h>  // some random generator tools
 #include <algorithm> // random shuffle
 #include <vector>    // use vector objects (useful for short lists bc no need for data management)
-#include <cmath>     // ceil
+#include <cmath>     // ceil, round
 #include <random>    // random generation functions
 #include <chrono>    // other needed tools for random generetion
 
@@ -1357,7 +1357,7 @@ public:
 
         if (quota < 1)
         {
-            quota = quota * currentPopulationSize;
+            quota = round(quota * currentPopulationSize);
 
             if (debug == true)
             cout << "Quota is " << quota << " this time step" << endl
@@ -1375,7 +1375,7 @@ public:
 
         while (ind < currentPopulationSize && cullCounter < quota) // iterate through individuals
         {
-            int rowIndex = shuffledPop[ind]; // get shuffled row index
+            int rowIndex = randomOrder[ind]; // get shuffled row index
 
             if (populationTablePtr[rowIndex][4] == 0)   // if animal is not dead already
             {
@@ -1392,7 +1392,7 @@ public:
                 cullCounter++;
 
                 if (debug == true)
-                cout << "Oh no! They got " memberTypes[membersMatchingListsIndex] << " number " << rowIndex << "! *trumpets sound*" << endl
+                cout << "Oh no! They got " << memberTypes[membersMatchingListsIndex] << " number " << rowIndex << "! *trumpets sound*" << endl
                      << "density on cell " << cellNb << " is now " << LandscapeTable[cellNb][colIndex] << endl
                      << endl;
             }
@@ -2444,14 +2444,14 @@ int main(int argc, char **argv)
             for (int i = 0; i < preyTypesNb; i++)
             {    
                 if (timeStep >= preyIntro[i])
-                    preys[i]->feed(world.landscapeTablePtr, true);
+                    preys[i]->feed(world.landscapeTablePtr, false);
             }
             // prey1->getInfo();
             // prey2->getInfo();
 
             /* predators */
             if (timeStep >= predIntro[0])
-                pred1->huntNew(world.landscapeTablePtr, false, true);
+                pred1->huntNew(world.landscapeTablePtr, false, false);
 
             // for (int i = 0; i < predatorTypesNb; i++)
             // {
@@ -2473,10 +2473,10 @@ int main(int argc, char **argv)
 
             /* -- management -- */
 
-            // if (timeStep % freqCull == 0)
-            // {
-            //     prey2->cull(cullQuot, world.landscapeTablePtr, true)
-            // } 
+            if (timeStep % freqCull == 0)
+            {
+                prey2->cull(cullQuot, world.landscapeTablePtr, true);
+            } 
 
             /* -- surviving -- */
 
