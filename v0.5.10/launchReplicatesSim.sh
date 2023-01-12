@@ -28,8 +28,8 @@ max_res_2=100 # argv[5] max resource 2 per cell
 
 # prey variables
 pry_nb=2        # argv[6] number of prey types
-pry_init_1=1500   # argv[7] prey 1 initial density in nb of individuals
-pry_init_2=100   # argv[8] prey 2 initial density
+pry_init_1=100   # argv[7] prey 1 initial density in nb of individuals
+pry_init_2=1500   # argv[8] prey 2 initial density
 pry_move_1=0.1  # argv[9] prey 1 max movement range in fraction of size
 pry_move_2=0.1  # argv[10] prey 2 movement range
 pry_cons_1=10	# argv[11] prey 1 max consumption in resource units
