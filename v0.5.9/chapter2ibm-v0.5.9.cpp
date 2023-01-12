@@ -2286,10 +2286,10 @@ int main(int argc, char **argv)
 
     while (timeStep <= timeMaxi)
     {
-        /* debug */
+        /* debug 
         cout << "time step " << timeStep << endl
              << endl;
-        
+        */
 
         if (timeStep > 0)
         {
@@ -2495,7 +2495,7 @@ int main(int argc, char **argv)
             world.resetResources();
 
             /* check if everything is where expected: OK */
-            world.getInfo();
+            // world.getInfo();
         }
 
         timeStep++;
