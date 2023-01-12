@@ -42,14 +42,14 @@ prd_oprt_1 = 0 	 # argv[33] predator 1 oportunistic? (0 or 1)
 prd_spcf_1 = 0 	 # argv[34] predator 1 specific? (0 or 1) 
 
 # time variables
-simu_time = 2000 	 # argv[35] simulation time
+simu_time = 3000 	 # argv[35] simulation time
 freq_repr = 10 	 # argv[36] frequency of reproduction trials
 freq_surv = 10 	 # argv[37] frequency of survival trials
 freq_rfll = 10 	 # argv[38] frequency of results measure
 
 # frequency of assessment
 freq_rslt = 10 	 # argv[39] frequency of landscape snap shot
-freq_snap = 2001 	 # argv[40] frequency of results measure
+freq_snap = 3001 	 # argv[40] frequency of results measure
 
 # number of replicates
 rep = 30
@@ -58,33 +58,33 @@ rep = 30
 
 rep 	 seed (arg[41]) 	 sim time (s) 	 sim time (h) 
 
-0 	 10253 			 11 		 0 
-1 	 27907 			 12 		 0 
-2 	 5138 			 11 		 0 
-3 	 26105 			 12 		 0 
-4 	 18166 			 11 		 0 
-5 	 11544 			 12 		 0 
-6 	 23960 			 11 		 0 
-7 	 9916 			 12 		 0 
-8 	 32195 			 12 		 0 
-9 	 23344 			 11 		 0 
-10 	 26444 			 12 		 0 
-11 	 16963 			 11 		 0 
-12 	 9281 			 12 		 0 
-13 	 183 			 11 		 0 
-14 	 8758 			 12 		 0 
-15 	 25164 			 11 		 0 
-16 	 22914 			 12 		 0 
-17 	 3663 			 11 		 0 
-18 	 23693 			 12 		 0 
-19 	 21084 			 11 		 0 
-20 	 1724 			 12 		 0 
-21 	 32404 			 11 		 0 
-22 	 21957 			 11 		 0 
-23 	 17139 			 12 		 0 
-24 	 32348 			 11 		 0 
-25 	 7026 			 12 		 0 
-26 	 2639 			 11 		 0 
-27 	 22438 			 12 		 0 
-28 	 4865 			 11 		 0 
-29 	 22327 			 12 		 0 
+0 	 16008 			 18 		 0 
+1 	 2938 			 19 		 0 
+2 	 6669 			 18 		 0 
+3 	 23024 			 19 		 0 
+4 	 4681 			 18 		 0 
+5 	 27876 			 19 		 0 
+6 	 9259 			 18 		 0 
+7 	 13491 			 19 		 0 
+8 	 31732 			 18 		 0 
+9 	 5339 			 19 		 0 
+10 	 26310 			 18 		 0 
+11 	 25152 			 19 		 0 
+12 	 22099 			 19 		 0 
+13 	 20777 			 19 		 0 
+14 	 5220 			 18 		 0 
+15 	 23229 			 18 		 0 
+16 	 30480 			 19 		 0 
+17 	 21845 			 20 		 0 
+18 	 7784 			 18 		 0 
+19 	 6777 			 19 		 0 
+20 	 7479 			 19 		 0 
+21 	 20599 			 19 		 0 
+22 	 14064 			 19 		 0 
+23 	 32327 			 18 		 0 
+24 	 18847 			 19 		 0 
+25 	 31779 			 18 		 0 
+26 	 9146 			 18 		 0 
+27 	 12631 			 18 		 0 
+28 	 18375 			 19 		 0 
+29 	 3057 			 19 		 0 
