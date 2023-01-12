@@ -48,7 +48,7 @@ prd_nb=1        # argv[21] number of predator types
 prd_init_1=100    # argv[22] predator 1 initial density in nb of individuals
 prd_move_1=0.1  # argv[23] predator 1 max movement range in fraction of size
 prd_surv_1=200	# arg[25]
-prd_offs_1=0.5    # argv[26] predator 1 max number of offspring
+prd_offs_1=!    # argv[26] predator 1 max number of offspring
 prd_intr_1=201    # argv[28] predator 1 time of introduction in the model
 prd_ctch_pry1_1=0.1  # argv[29] predator 1 prey1 catch probability
 prd_ctch_pry2_1=0.1  # argv[30] predator 1 prey2 catch probability
@@ -91,7 +91,7 @@ prd_repr_1=$(($prd_surv_1/1)); # echo "prd_repr_1 = $prd_repr_1" # argv[27] pred
 # prd_cvrt_pry2_1=$(($ratio*$prd_cvrt_pry1_1))  # argv[32] predator 1 prey1 resources/catch
 
 # name the simulation with only the variables of interest and their value
-sim_name="test-intro-prdInit200-prdCtPr0.1" # argv[1]
+sim_name="test-intro-prdSurv200-prdCtPr0.1-prdOffs1" # argv[1]
 
 ## Warning about timing of introduction ##
 # if [[ $varA == 1 && ($varB == "t1" || $varC == "t2") ]]; then
