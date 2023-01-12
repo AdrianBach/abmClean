@@ -31,7 +31,7 @@ prd_init_1 = 100 	 # argv[22] predator 1 initial density in nb of individuals
 prd_move_1 = 0.1 	 # argv[23] predator 1 max movement range in fraction of size
 prd_cons_1 = 60 	 # argv[24] predator 1 max movement range in fraction of size
 prd_surv_1 = 200 	 # argv[25] predator 1 resource units needed to pass survival trial
-prd_offs_1 = ! 	 # argv[26] predator 1 max number of offspring
+prd_offs_1 = 1 	 # argv[26] predator 1 max number of offspring
 prd_repr_1 = 200 	 # argv[27] predator 1 resource units needed to pass reproduction trial
 prd_intr_1 = 201 	 # argv[28] predator 1 time of introduction in the model
 prd_ctch_pry1_1 = 0.1 	 # argv[29] predator 1 prey 1 catch probablility 
@@ -58,33 +58,33 @@ rep = 30
 
 rep 	 seed (arg[41]) 	 sim time (s) 	 sim time (h) 
 
-0 	 17275 			 27 		 0 
-1 	 1968 			 27 		 0 
-2 	 13603 			 26 		 0 
-3 	 31503 			 27 		 0 
-4 	 6086 			 27 		 0 
-5 	 463 			 26 		 0 
-6 	 9031 			 26 		 0 
-7 	 11485 			 27 		 0 
-8 	 12847 			 27 		 0 
-9 	 20618 			 26 		 0 
-10 	 6930 			 27 		 0 
-11 	 27897 			 26 		 0 
-12 	 20554 			 27 		 0 
-13 	 31406 			 26 		 0 
-14 	 9605 			 26 		 0 
-15 	 3240 			 27 		 0 
-16 	 13216 			 26 		 0 
-17 	 5680 			 26 		 0 
-18 	 23215 			 27 		 0 
-19 	 30283 			 27 		 0 
-20 	 22140 			 26 		 0 
-21 	 31291 			 26 		 0 
-22 	 4819 			 27 		 0 
-23 	 17713 			 26 		 0 
-24 	 22181 			 27 		 0 
-25 	 23466 			 26 		 0 
-26 	 20751 			 26 		 0 
-27 	 17966 			 27 		 0 
-28 	 5106 			 26 		 0 
-29 	 10388 			 27 		 0 
+0 	 16949 			 18 		 0 
+1 	 2098 			 18 		 0 
+2 	 30700 			 17 		 0 
+3 	 11593 			 18 		 0 
+4 	 20554 			 18 		 0 
+5 	 13056 			 18 		 0 
+6 	 1643 			 18 		 0 
+7 	 26206 			 21 		 0 
+8 	 29318 			 18 		 0 
+9 	 14903 			 17 		 0 
+10 	 1636 			 17 		 0 
+11 	 22261 			 19 		 0 
+12 	 7100 			 17 		 0 
+13 	 16864 			 18 		 0 
+14 	 9001 			 18 		 0 
+15 	 32315 			 18 		 0 
+16 	 12434 			 20 		 0 
+17 	 8348 			 22 		 0 
+18 	 23827 			 18 		 0 
+19 	 6493 			 17 		 0 
+20 	 31321 			 18 		 0 
+21 	 28068 			 18 		 0 
+22 	 19870 			 18 		 0 
+23 	 4540 			 18 		 0 
+24 	 31822 			 17 		 0 
+25 	 25794 			 18 		 0 
+26 	 29991 			 18 		 0 
+27 	 23710 			 17 		 0 
+28 	 4055 			 19 		 0 
+29 	 14341 			 18 		 0 
