@@ -29,7 +29,7 @@ max_res_2=100 # argv[5] max resource 2 per cell
 # prey variables
 pry_nb=2        # argv[6] number of prey types
 pry_init_1=100   # argv[7] prey 1 initial density in nb of individuals
-pry_init_2=100   # argv[8] prey 2 initial density
+pry_init_2=1500   # argv[8] prey 2 initial density
 pry_move_1=0.1  # argv[9] prey 1 max movement range in fraction of size
 pry_move_2=0.1  # argv[10] prey 2 movement range
 pry_cons_1=10	# argv[11] prey 1 max consumption in resource units
@@ -41,7 +41,7 @@ pry_offs_2=1   # argv[16] prey 2 max number of offspring
 # pry_repr_1=5  # argv[17] prey 1 resource units needed to pass reproduction trial
 # pry_repr_2=5  # argv[18] prey 2 resource units needed to pass reproduction trial
 pry_intro_1=0   # argv[19]
-pry_intro_2=0   # argv[20]
+pry_intro_2=1001   # argv[20]
 
 # predator variables
 prd_nb=1        # argv[21] number of predator types
@@ -58,7 +58,7 @@ prd_oprt_1=0    # argv[33] is predator oportunistic? (0 or 1)
 prd_spcf_1=0    # argv[34] is predator specific? (0 or 1)
 
 # time variables
-simu_time=1000    # argv[35] simulation time
+simu_time=3000    # argv[35] simulation time
 freq_repr=10   # argv[36] frequency of reproduction trials
 freq_surv=10    # argv[37] frequency of survival trials
 freq_rfll=10    # argv[38] frequency of landscape resources refill
@@ -91,7 +91,7 @@ prd_repr_1=$(($prd_surv_1/1)); # echo "prd_repr_1 = $prd_repr_1" # argv[27] pred
 # prd_cvrt_pry2_1=$(($ratio*$prd_cvrt_pry1_1))  # argv[32] predator 1 prey1 resources/catch
 
 # name the simulation with only the variables of interest and their value
-sim_name="test-intro-pry2init100-prdSurv200-prdCtPr0.1-prdOffs0.5" # argv[1]
+sim_name="test-intro-pry2init1500-prdSurv200-prdCtPr0.1-prdOffs0.5" # argv[1]
 
 ## Warning about timing of introduction ##
 # if [[ $varA == 1 && ($varB == "t1" || $varC == "t2") ]]; then
