@@ -50,8 +50,8 @@ prd_move_1=0.1  # argv[23] predator 1 max movement range in fraction of size
 prd_surv_1=300	# arg[25]
 prd_offs_1=1    # argv[26] predator 1 max number of offspring
 prd_intr_1=201    # argv[28] predator 1 time of introduction in the model
-prd_ctch_pry1_1=0.2  # argv[29] predator 1 prey1 catch probability
-prd_ctch_pry2_1=0.2  # argv[30] predator 1 prey2 catch probability
+prd_ctch_pry1_1=0.4  # argv[29] predator 1 prey1 catch probability
+prd_ctch_pry2_1=0.4  # argv[30] predator 1 prey2 catch probability
 prd_cvrt_pry1_1=100  # argv[31] predator 1 prey1 resources/catch
 prd_cvrt_pry2_1=100  # argv[32] predator 1 prey1 resources/catch
 prd_oprt_1=0    # argv[33] is predator oportunistic? (0 or 1)
@@ -91,7 +91,7 @@ prd_repr_1=$(($prd_surv_1/1)); # echo "prd_repr_1 = $prd_repr_1" # argv[27] pred
 # prd_cvrt_pry2_1=$(($ratio*$prd_cvrt_pry1_1))  # argv[32] predator 1 prey1 resources/catch
 
 # name the simulation with only the variables of interest and their value
-sim_name="nullCalibNrw-py1Init100-prdSurv300-prdCtPr0.2" # argv[1]
+sim_name="nullCalibNrw-py1Init100-prdSurv300-prdCtPr0.4" # argv[1]
 
 ## Warning about timing of introduction ##
 #if [[ ( $P = "SFTP" && $PORT != "22" ) || ( $P = "FTPS" && $PORT != "990" && $PORT != "21" ) ]] ; then
