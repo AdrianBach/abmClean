@@ -41,31 +41,31 @@ pry_offs_2=1    # argv[16] prey 2 max number of offspring
 # pry_repr_1=5  # argv[17] prey 1 resource units needed to pass reproduction trial
 # pry_repr_2=5  # argv[18] prey 2 resource units needed to pass reproduction trial
 pry_intro_1=0   # argv[19]
-pry_intro_2=1001   # argv[20]
+pry_intro_2=0   # argv[20]
 
 # predator variables
 prd_nb=1        # argv[21] number of predator types
 prd_init_1=100    # argv[22] predator 1 initial density in nb of individuals
 prd_move_1=0.1  # argv[23] predator 1 max movement range in fraction of size
-prd_surv_1=200	# arg[25]
+prd_surv_1=300	# arg[25]
 prd_offs_1=1    # argv[26] predator 1 max number of offspring
 prd_intr_1=201    # argv[28] predator 1 time of introduction in the model
-prd_ctch_pry1_1=0.1  # argv[29] predator 1 prey1 catch probability
-prd_ctch_pry2_1=0.1  # argv[30] predator 1 prey2 catch probability
-prd_oprt_1=0    # argv[33] is predator oportunistic? (0 or 1)
+prd_ctch_pry1_1=0.2  # argv[29] predator 1 prey1 catch probability
+prd_ctch_pry2_1=0.2  # argv[30] predator 1 prey2 catch probability
 prd_cvrt_pry1_1=100  # argv[31] predator 1 prey1 resources/catch
 prd_cvrt_pry2_1=100  # argv[32] predator 1 prey1 resources/catch
+prd_oprt_1=0    # argv[33] is predator oportunistic? (0 or 1)
 prd_spcf_1=0    # argv[34] is predator specific? (0 or 1)
 
 # time variables
-simu_time=3000    # argv[35] simulation time
+simu_time=1000    # argv[35] simulation time
 freq_repr=10   # argv[36] frequency of reproduction trials
 freq_surv=10    # argv[37] frequency of survival trials
 freq_rfll=10    # argv[38] frequency of landscape resources refill
 
 # frequency of assessment
 freq_rslt=10    # argv[39] frequency of landscape results shot
-freq_snap=3001  # argv[40] frequency of snap measure
+freq_snap=1001  # argv[40] frequency of snap measure
 
 # number of replicates
 rep=10
@@ -91,7 +91,7 @@ prd_repr_1=$(($prd_surv_1/1)); # echo "prd_repr_1 = $prd_repr_1" # argv[27] pred
 # prd_cvrt_pry2_1=$(($ratio*$prd_cvrt_pry1_1))  # argv[32] predator 1 prey1 resources/catch
 
 # name the simulation with only the variables of interest and their value
-sim_name="test-intro-prdSurv200-prdCtPr0.1-prdOffs1-pry2init1500" # argv[1]
+sim_name="nullCalibNrw-py1Init100-prdSurv300-prdCtPr0.2" # argv[1]
 
 ## Warning about timing of introduction ##
 #if [[ ( $P = "SFTP" && $PORT != "22" ) || ( $P = "FTPS" && $PORT != "990" && $PORT != "21" ) ]] ; then
