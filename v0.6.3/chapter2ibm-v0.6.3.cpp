@@ -1611,6 +1611,13 @@ public:
             preference.push_back(dietsTable[resourceTypesNb + i][4]);
         }
 
+        /* debug */
+        for (int i = 0; i < preference.size(); i++)
+        {
+            cout << preference[i] << " ";
+        }
+        
+
         /* compute max catches */
         for (int i = 0; i < conversionRates.size(); i++)
         {
