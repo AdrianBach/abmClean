@@ -26,8 +26,8 @@ max_res_2=400 # argv[5] max resource 2 per cell
 
 # prey variables
 pry_nb=2        # argv[6] number of prey types
-pry_init_1=100  # argv[7] prey 1 initial density in nb of individuals
-pry_init_2=4000  # argv[8] prey 2 initial density
+pry_init_1=1000  # argv[7] prey 1 initial density in nb of individuals
+pry_init_2=1000  # argv[8] prey 2 initial density
 pry_move_1=0.1  # argv[9] prey 1 max movement range in fraction of size
 pry_move_2=0.1  # argv[10] prey 2 movement range
 pry_cons_1=10	# argv[11] prey 1 max consumption in resource units
@@ -38,12 +38,12 @@ pry_offs_1=1    # argv[15] prey 1 max number of offspring
 pry_offs_2=1    # argv[16] prey 2 max number of offspring
 pry_repr_1=20  # argv[17] prey 1 resource units needed to pass reproduction trial
 pry_repr_2=$pry_surv_2  # argv[18] prey 2 resource units needed to pass reproduction trial
-pry_intro_1=301   # argv[19]
+pry_intro_1=0   # argv[19]
 pry_intro_2=0   # argv[20]
 
 # predator variables
 prd_nb=1        # argv[21] number of predator types
-prd_init_1=300  # argv[22] predator 1 initial density in nb of individuals
+prd_init_1=10  # argv[22] predator 1 initial density in nb of individuals
 prd_move_1=0.1  # argv[23] predator 1 max movement range in fraction of size
 prd_cons_1=100   # argv[24] predator 1 satiation level in resource units
 prd_surv_1=200	# arg[25] predator 1 maintenance cost in resource units
@@ -55,10 +55,10 @@ prd_ctch_pry2_1=0.04  # argv[30] predator 1 prey2 catch probability
 prd_cvrt_pry1_1=110  # argv[31] predator 1 prey1 resources/catch
 prd_cvrt_pry2_1=110  # argv[32] predator 1 prey1 resources/catch
 prd_oprt_1=0    # argv[33] is predator oportunistic? (0 or 1)
-prd_spcf_1=0    # argv[34] is predator specific? (0 or 1)
+prd_spcf_1=1    # argv[34] is predator specific? (0 or 1)
 
 # time variables
-simu_time=2000    # argv[35] simulation time
+simu_time=20    # argv[35] simulation time
 freq_repr=10   # argv[36] frequency of reproduction trials
 freq_surv=10   # argv[37] frequency of survival trials
 freq_rfll=10   # argv[38] frequency of landscape resources refill
@@ -76,7 +76,7 @@ prd_cull_impl_1=1001 # argv[45] prey 2 time of culling implementation
 prd_freq_cull_1=10 # argv[46] prey 2 culling intervention frequency
 
 # number of replicates
-rep=3
+rep=1
 
 ## Non user defined variables ##
 

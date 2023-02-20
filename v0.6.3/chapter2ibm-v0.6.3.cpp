@@ -1611,12 +1611,14 @@ public:
             preference.push_back(dietsTable[resourceTypesNb + i][4]);
         }
 
-        /* debug */
+        /* debug:OK 
+        cout << "predator preference vector" << endl;
         for (int i = 0; i < preference.size(); i++)
         {
             cout << preference[i] << " ";
         }
-        
+        cout << endl << endl;
+        */
 
         /* compute max catches */
         for (int i = 0; i < conversionRates.size(); i++)
@@ -2042,6 +2044,23 @@ public:
                             {
                                 sortedIndexes.push_back(i);
                             }
+                            
+			    /* debug: OK 
+			    cout << "sorted preference before:" << endl;
+                            for (int i = 0; i < sortedPreference.size(); i++)
+                            {
+                                cout << sortedPreference[i] << " ";
+                            }
+                            cout << endl
+                                 << endl;
+			    cout << "sorted indexes before:" << endl;
+                            for (int i = 0; i < sortedIndexes.size(); i++)
+                            {
+                                cout << sortedIndexes[i] << " ";
+                            }
+                            cout << endl
+                                 << endl;
+                            */
 
                             /* sorting according to conversion rate while keeping the indexes */
                             int row = 0; // initiate row count
@@ -2068,15 +2087,46 @@ public:
                                 }
                             }
 
-                            /* update availablepreys */
+			    /* debug: OK 
+			    cout << "sorted preference after:" << endl;
+                            for (int i = 0; i < sortedPreference.size(); i++)
+                            {
+                                cout << sortedPreference[i] << " ";
+                            }
+                            cout << endl
+                                 << endl;
+			    cout << "sorted indexes after:" << endl;
                             for (int i = 0; i < sortedIndexes.size(); i++)
                             {
-                                /* repeat preyType number as often as their density on the cell*/
-                                for (int j = 0; j < preysDensity[sortedIndexes[i]]; i++)
-                                {
-                                    availablePreys.push_back(sortedIndexes[i]);
-                                }
+                                cout << sortedIndexes[i] << " ";
                             }
+                            cout << endl
+                                 << endl;
+                            */   
+                              
+                            vector <int> tempVec;	// initialising a temporary vector
+
+//                            /* update availablepreys */
+//                            for (int i = 0; i < sortedIndexes.size(); i++)
+//                            {
+//                                /* repeat preyType number as often as their density on the cell*/
+//                                for (int j = 0; j < preysDensity[sortedIndexes[i]]; i++)
+//                                {
+//                                    tempVec.push_back(sortedIndexes[i]);
+//                                }
+//                            }
+                           
+                            for (int i = 0; i < preysDensity.size(); i++)
+			    {
+			        /* repeat preyType number as often as their density on the cell*/
+			        for (int j = 0; j < preysDensity[sortedIndexes[i]]; j++)
+			        {
+			            tempVec.push_back(sortedIndexes[i]);
+			        }
+			    }
+                            
+                            /* replace available preys vector */
+                            availablePreys = tempVec;
                         }
 
                         if (debug == true)
@@ -2533,7 +2583,7 @@ int main(int argc, char **argv)
 
             /* predators */
             if (timeStep >= predIntro[0])
-                pred1->huntNew(world.landscapeTablePtr, false, false);
+                pred1->huntNew(world.landscapeTablePtr, false, true);
 
             // for (int i = 0; i < predatorTypesNb; i++)
             // {
